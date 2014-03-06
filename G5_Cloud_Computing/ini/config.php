@@ -9,13 +9,13 @@
 	    $_SERVER['HTTP_HOST'] == 'www.josefflores.com' ) { 				//<------ ADD THIS if statement for every server so that it runs without having to change the configuration file everytime
 			
 		$A[ 'W_ROOT' ] 	= 'http://www.josefflores.com/csr/' ;			// Jose flores test server
-		$A[ 'D_ROOT' ] 	= 'D:/Github/2014_SP_SE_1/cloudComputing/' ;	
+		$A[ 'D_ROOT' ] 	= 'D:/Github/2014_SP_SE_1/G5_Cloud_Computing/' ;	
 		
 	}
 	else {
 		
 		$A[ 'W_ROOT' ] 	= 'http://107.20.150.132/csr/' ;					// AWS Server settings
-		$A[ 'D_ROOT' ] 	= 'C:/wamp/apps/csr/' ;	
+		$A[ 'D_ROOT' ] 	= 'C:/wamp/apps/csr/SE_at_UML/G5_Cloud_Computing/' ;	
 		
 	}
 	
