@@ -1,0 +1,103 @@
+div.toolbar-tabs {
+		background: #999999 ;
+		border-bottom : 1px solid #666666 ;
+		float : left ;
+		height : 20px ;
+		width : 100% ;
+	}
+
+a.toolbar-tabs-tab-active  {
+		margin-top: 1px;
+	}
+a.toolbar-tabs-tab-active ,
+a.toolbar-tabs-tab-inactive {
+		float : left ;
+		width : 150px ;
+		height : 20px ;
+	}
+	
+div.toolbar-tabs-tab-active-center:hover ,
+div.div.toolbar-tabs-tab-active-left:hover + div.toolbar-tabs-tab-active-center ,
+div.toolbar-tabs-tab-inactive-center:hover ,
+div.div.toolbar-tabs-tab-inactive-left:hover + div.toolbar-tabs-tab-inactive-center  {
+		color : #2e83ff ;
+	}
+
+a.toolbar-tabs-tab-inactive {
+		height : 19px ;
+		margin-top : 1px ;
+	}
+
+div.toolbar-tabs-tab-active-left ,
+div.toolbar-tabs-tab-active-right ,
+div.toolbar-tabs-tab-inactive-left ,
+div.toolbar-tabs-tab-inactive-right  {
+		float : left ;
+		height : 20px ;
+		width : 20px ;
+	}
+div.toolbar-tabs-tab-active-center-close ,
+div.toolbar-tabs-tab-inactive-center-close {
+		float : left ;
+		margin : 2px ;
+		height : 16px ;
+		width : 16px ;
+		background-image : url(../img/jquery-ui/ui-icons_222222_256x240.png)  ;
+		background-position : -80px -128px ;
+	}
+
+div.toolbar-tabs-tab-active-center-close:hover ,
+div.toolbar-tabs-tab-inactive-center-close:hover {
+	background-image : url(../img/jquery-ui/ui-icons_2e83ff_256x240.png)  ;
+	background-position : -80px -128px ;
+	}
+	
+div.toolbar-tabs-tab-active-center ,
+div.toolbar-tabs-tab-inactive-center {
+		float : left ;
+		height : 20px ;
+		width : 110px ;
+	}
+
+div.toolbar-tabs-tab-active-center-text ,
+div.toolbar-tabs-tab-inactive-center-text {
+		float : left ;
+		width : 90px ;
+		height : 20px ;
+	}
+
+a.toolbar-tabs-tab-active {
+		background : #ffffff ;
+	}
+
+div.toolbar-tabs-tab-active-left ,
+div.toolbar-tabs-tab-inactive-left {
+		background-image : url( '../img/toolbar-tabs/toolbar-tabs-tab-left.png' ) ;
+	}
+div.toolbar-tabs-tab-active-right ,
+div.toolbar-tabs-tab-inactive-right {
+		background-image : url( '../img/toolbar-tabs/toolbar-tabs-tab-right.png' ) ;
+	}
+
+div.toolbar-tabs-tab-active-center {
+
+	}
+div.toolbar-tabs-tab-active-center-text {}
+div.toolbar-tabs-tab-active-center-close { 
+	margin: 4px 0 0 0 ; 
+}
+
+a.toolbar-tabs-tab-inactive { 
+		background : #dddddd ;
+		display :none ;
+	}
+	
+div.toolbar-tabs-tab-inactive-center {
+
+}
+div.toolbar-tabs-tab-inactive-center-text {}
+div.toolbar-tabs-tab-inactive-center-close { 
+	margin : 4px 0 0 0 ; 
+}
+		
+		

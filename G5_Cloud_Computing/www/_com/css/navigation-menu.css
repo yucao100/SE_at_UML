@@ -1,0 +1,36 @@
+div.navigation-menu {
+		float : left ;
+		font-size : 14px ;
+		height : 50px ;
+		line-height : 50px ;
+		text-transform : uppercase ;
+		width : 650px ;
+	}
+
+	div.navigation-menu ul {
+			
+			
+			float: left;
+list-style-type: none;
+line-height: 50px;
+height: 50px;
+padding: 0px;
+margin: 0px;
+width: 100%;
+		}
+
+		div.navigation-menu ul  > li {
+				float : left ;
+				height : 35px ;
+				padding : 0 10px ;
+				text-align : center ;
+			}
+			
+			div.navigation-menu ul > li > a {
+					color : #ffffff ;
+					height: 35px ;
+				}
+			div.navigation-menu ul > li > a:hover {
+					color : #007dea ;
+					
+				}	
