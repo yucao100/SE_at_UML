@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".MainMenuActivity" >
+
+    <ImageView
+        android:id="@+id/ivLoginLogo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="30.58"
+        android:contentDescription="@string/logo_text_string"
+        android:src="@drawable/ic_launcher" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/username_hint_string" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/password_hint_string" />
+    
+    <Button
+        android:id="@+id/bLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/login_button_string" />
+    
+     <TextView
+         android:id="@+id/tvSignUp"
+         android:layout_width="52dp"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:ems="10"
+         android:text="@string/sign_up_text_string" />
+
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:layout_gravity="center" >
+
+         <TextView
+             android:id="@+id/tvRememberMe"
+             android:layout_width="116dp"
+             android:layout_height="wrap_content"
+             android:ems="10"
+             android:text="@string/remember_me_string" />
+
+         <CheckBox
+             android:id="@+id/cbRememberMe"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+     </LinearLayout>
+    
+</LinearLayout>

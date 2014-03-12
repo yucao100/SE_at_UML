@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context=".MainMenuActivity" >
+
+    <GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:rowCount="1" >
+
+        <TextView
+            android:id="@+id/tvTopRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="3"
+            android:layout_row="0"
+            android:text="Top Right" />
+        
+    </GridLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/ivMainMenuLogo"
+            android:layout_width="91dp"
+            android:layout_height="106dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_launcher" />
+
+        <Button
+            android:id="@+id/health_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dip"
+            android:layout_marginLeft="50dip"
+            android:layout_marginRight="50dip"
+            android:text="@string/health_button_string" />
+
+        <Button
+            android:id="@+id/profile_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dip"
+            android:layout_marginLeft="50dip"
+            android:layout_marginRight="50dip"
+            android:text="@string/profile_button_string" />
+
+        <Button
+            android:id="@+id/options_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dip"
+            android:layout_marginLeft="50dip"
+            android:layout_marginRight="50dip"
+            android:text="@string/options_button_string" />
+
+        <Button
+            android:id="@+id/emergency_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dip"
+            android:layout_marginRight="50dip"
+            android:layout_marginTop="50dip"
+            android:text="@string/emergency_button_string" />
+    </LinearLayout>
+
+</LinearLayout>
