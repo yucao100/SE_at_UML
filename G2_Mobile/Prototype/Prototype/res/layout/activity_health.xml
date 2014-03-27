@@ -1,0 +1,124 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:rowCount="5"
+    android:columnCount="2"
+    tools:context=".HealthActivity" >
+    
+    <TextView
+        android:id="@+id/tvHeartRate"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:layout_row="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/heart_rate_string" />
+    
+    <TextView
+        android:id="@+id/tvWalkingSpeed"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:layout_row="1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/walking_speed_string" />
+    
+    <TextView
+        android:id="@+id/tvFallStatus"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:layout_row="2"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/fall_status_string" />
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:layout_row="3"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/location_string" />
+    
+    <TextView
+        android:id="@+id/tvOverallHealth"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:layout_row="4"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/overall_health_string" />
+
+    <TextView
+        android:id="@+id/tvHeartRateData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="left|center_vertical"
+        android:layout_row="0"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:text="@string/heart_rate" />
+
+    <TextView
+        android:id="@+id/tvWalkingSpeedData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="left|center_vertical"
+        android:layout_row="1"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:text="@string/walking_speed" />
+
+    <TextView
+        android:id="@+id/tvFallStatusData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="left|center_vertical"
+        android:layout_row="2"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:text="@string/fall_status" />
+
+    <TextView
+        android:id="@+id/tvLocationData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="left|center_vertical"
+        android:layout_row="3"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:text="@string/location" />
+
+    <TextView
+        android:id="@+id/tvOverallHealthData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="left|center_horizontal"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:layout_row="4"
+        android:text="@string/overall_health" />
+    
+</GridLayout>

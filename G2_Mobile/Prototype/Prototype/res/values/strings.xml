@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Monitor</string>
+    <string name="action_settings">Settings</string>
+    
+    <!-- Universal Strings -->
+    <string name="has_fallen">Unknown</string>
+    <string name="current_location_x">Unknown</string>
+    <string name="current_location_y">Unknown</string>
+    <string name="called_dr">Unknown</string>
+    
+    <!-- Need update in Login to fill all data fields -->
+    <string name="profile_pic">Profile Picture</string>
+    <string name="login_user">Unknown</string>
+    <string name="login_password_user">Unknown</string>
+    <string name="first_name_user">Unknown</string>
+    <string name="last_name_user">Unknown</string>
+    <string name="age_user">Unknown</string>
+    <string name="address_user">Unknown</string>
+    <string name="current_dr_user">Unknown</string>
+    
+    <!-- Need constant Update variables in HealthActivity -->
+    <string name="heart_rate">0</string>
+    <string name="walking_speed">0</string>
+    <string name="fall_status">0</string>
+    <string name="location">Unknown</string>
+    <string name="overall_health">Unknown</string>
+    
+    <!-- Need of Strings to store data from Options Menu -->
+    <string name="gps_status">Unknown</string>
+    <string name="bluetooth_status">Unknown</string>
+    <string name="screen_color">Unknown</string>
+    <string name="alarm_sound">Unknown</string>
+    <string name="update_every_x">Unknown</string>
+    
+    <!-- Strings that are used for Widget names(ie Buttons, TextView, EditTexts, etc) -->
+    <string name="overall_health_string">Overall Health:</string>
+    <string name="walking_speed_string">Walking Speed:</string>
+    <string name="fall_status_string">Fall Status:</string>
+    <string name="location_string">Location:</string>
+    <string name="heart_rate_string">Heart rate:</string>
+    <string name="password_hint_string">Password</string>
+    <string name="username_hint_string">Username</string>
+    <string name="remember_me_string">Remember Me?</string>
+    <string name="first_name_string">First Name</string>
+    <string name="last_name_string">Last Name</string>
+    <string name="logo_text_string">LOGO</string>
+    <string name="sign_up_text_string">Sign up</string>
+    <string name="login_button_string">Login</string>
+    <string name="health_button_string">Health</string>
+    <string name="profile_button_string">Profile</string>
+    <string name="options_button_string">Options</string>
+    <string name="emergency_button_string">EMERGENCY</string>
+
+</resources>
