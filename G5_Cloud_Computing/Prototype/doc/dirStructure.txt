@@ -1,0 +1,89 @@
+Information ------------------------------------------------------------
+Authors				AuthorName
+Created				Date
+License				License Type
+Name				WGTName
+Purpose				Description
+
+Changelog --------------------------------------------------------------	
+Date				Action
+03/27/14			Created current directory structure and added
+					content expalanations
+
+Content ----------------------------------------------------------------	
+
+#SERVER SIDE ACCESS
+
++ doc  						- holds any document relating to projects developement
+| 			
++ ini  						- holds configuration files
+|  + config.php				- the application configuration file	
+| 		
++ php/		
+|  + api 					- holds the api class and api related materials
+|  |  + api.php 			- the api class
+|  | 		
+|  + head 					- holds files that generate the head of the documents
+|  |  + index.php			- includes any 'head' type content ie the remaining files in this directory
+|  |  + css.php				- includes all necessary css files
+|  |  + js.php				- includes all necessary js files and then the onload.js file
+|  |  + meta.php			- includes all meta information
+|  | 		
+|  + tmp 					- holds php templates {templates are static}
+|  |  + page.php			- the generic page template
+|  | 		
+|  + wgt 					- holds php widgets {wgts are templates that accept parametrs}
+|     + example-wgt/		- wgt template		
+| 	  |  + bin 				- holds execution files, such as a flow controller for source file(s) (ie main(){})
+|     |  |  + index.php		- the default src controller file
+|     |  | 
+|     |  + doc				- holds the widget manual file(s)
+|     |  |  + readme.txt	- author and widget information
+|     |  | 
+|     |  + ini				- holds the widget configuration file(s)
+|     |  |  + config.php	- the default configuration file
+|     |  | 
+|     |  + php				- holds widget base code
+|     |  |  + index.php		- the default widget class, this file holds all wgt unique code needed to create the wgt object and creates a widget object
+|     |  | 
+|     |  + src				- holds instruction set(s)
+|     |  |  + index.php		- default instruction file based off the wgt unique code and the application code
+|     |  | 
+|     |  + index.php		- this file processes parametrs, determines configuration, initialiazes the widget, cleans up after the widget, and is the included jump point into the widget
+|     | 
+|     + navigation-menu/	- holds the header navigation menu
+|     + profile-generator/	- holds the profile template
+|     + toolbar-menu/		- holds the toolbar dropdown menu
+|     + toolbar-tabs/		- holds the profile tabs
+| 			
++ usr 						- holds user specific files
+|  + * /					- a unique user
+| 		
+| 
+|  # CLIENT SIDE ACCESS 
+| 
+| 
++ www/  					- holds the web visible documents
+   + _api 					- holds files related to api access
+   |  + index.php			- the ajax call handler
+   | 
+   + _com 					- holds common files such as javascript, css, and image files
+   |  + css					- contains the css files
+   |  + fonts				- contains the font files
+   |  + img					- contains the image files
+   |  + js					- contains the js files
+   |     + lib				- user defined libraries
+   | 	   + onload.js		- the onload file
+   | 
+   + _portal 				- the non regular acces points such as admin. developer access
+   |  + admin				- the administrative portal
+   |  + developer			- the developer portal
+   | 
+   + * /					- the web pages 
+   |  + index.php			- the landing page includes libraries and configurations, determines content page
+   |  + content.php			- the content page contains the templates content contains a define guard for illegal acces
+   | 
+   + index.php				- the HOME page includes libraries and configurations, determines content page
+   + content.php			- the content page contains the templates content contains a define guard for illegal acces
+   + .htaccess				- server configuration file for webpage access
+

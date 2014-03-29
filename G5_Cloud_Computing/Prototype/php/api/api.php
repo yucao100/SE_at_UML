@@ -9,8 +9,36 @@
 			public function __construct( ) {}
 			
 			// MYSQL FUNCTIONS
-			 
-			private function mysqlAdd( $database , $table , $field , $value ) {}
+			
+			/**
+			 * name
+			 * 
+			 * about
+			 * 
+			 * @param var1 		definition 
+			 * 
+			 * @return	0
+			 * @return	1		explain
+			 * 
+			 * @throws
+			 */ 
+			private function mysqlAdd( $database , $table , $field , $value ) {
+			
+				//  CHANGE LOG
+				//	DATE	AUTHOR 		MOD
+				/*	
+				 * 
+				 */
+				 
+				// 	VARIABLES
+				/*  varOne
+				 * 	CONST_ANTS 
+				 */
+				
+				// 	CODE
+				
+				
+			}
 					
 			private function mysqlDrop( $database , $table , $field ) {}
 			
@@ -39,13 +67,13 @@
 			
 			// COMMENT FUNCTIONS
 			
-			private function commentAdd() {}
+			public function commentAdd( $user , $target , $comment ) {}
 					
-			private function commentDrop() {}
+			public function commentDrop() {}
 			
-			private function commentEdit() {}
+			public function commentEdit() {}
 			
-			private function commentGet() {}
+			public function commentGet() {}
 			
 			
 		}
