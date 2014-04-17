@@ -58,7 +58,7 @@
 					
 					echo 	'<li> 
 								
-								<a class="toolbar-menu" onclick="toolbar-menu-item(' , $enum  , ');">
+								<a class="toolbar-menu" onclick="toolbar_menu_item(\'' , $enum  , '\');">
 								
 									<div class="toolbar-menu-image" style="background-position:' , $pos['x'] , 'px ' , $pos['y']  , 'px;">
 										

@@ -4,7 +4,9 @@
 	ini_set( 'error_prepend_string', '<div class="error">[ PHP ]' ) ;
 	ini_set( 'error_append_string',  '</div>' );
 	
-	require_once( 'D:/webapps/csr/ini/config.php' ) ;
+	$basePath = dirname(__FILE__);
+	require_once( $basePath."/../../../../ini/config.php" );
+	
 	
 	$A[ 'CONTENT' ] = 'content.php' ;
 	

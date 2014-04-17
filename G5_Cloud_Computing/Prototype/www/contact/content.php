@@ -4,5 +4,6 @@
 		header( 'Location: ./' ) ;
 		
 	// Content begin
-	echo 'MyPageContent' ;
+	include( $A[ 'D_WGT' ].'contact-form/index.php' ) ;
+
 ?>

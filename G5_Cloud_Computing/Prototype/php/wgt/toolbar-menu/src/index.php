@@ -1,7 +1,7 @@
 <?php 
 		echo '<div class="toolbar-menu">
 	
-				<ul>' ;
+				<ul id="toolbar-menu-ul">' ;
 					
 		
 		// For every menu topic

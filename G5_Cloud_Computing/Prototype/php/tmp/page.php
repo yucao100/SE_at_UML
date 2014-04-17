@@ -1,6 +1,6 @@
 <?php 	
-	// require_once( $A[ 'D_API' ].'index.php') ;
-	// require_once( $A[ 'D_LIB' ].'index.php') ;
+	// require_once( $A[ 'D_API' ].'api.php') ;
+	require_once( $A[ 'D_LIB' ].'library.php') ;
 	
 	// $user = new session() ;
 	
@@ -42,16 +42,7 @@
 				
 					<div class="main">' ;
 					
-						include( $A[ 'D_WGT' ].'toolbar-menu/index.php' ) ;
-						
-				echo 	'<div class="profile">' ;
-						
-							include( $A[ 'D_WGT' ].'toolbar-tabs/index.php' ) ;
-							include( $A[ 'D_WGT' ].'profile-generator/index.php' ) ;
-							
-						
-							//include( $A[ 'CONTENT' ] ) ;
-				echo 	'</div>' ;
+				 include( $A[ 'CONTENT' ] ) ;
 						
 			echo 	'</div>
 					

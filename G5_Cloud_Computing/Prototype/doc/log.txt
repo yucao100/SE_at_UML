@@ -1,0 +1,65 @@
+APR 4
+Group Meeting
+2 hrs
+Group meeting
+Worked with the group to assign sections of the project, and discussed the API and databases
+
+APR 6
+Worked on the Website
+4 hrs
+Worked on the registration and profile sections
+Added dummy login fields to be linked later to the API, as well as integrated Jquery ui to give a tab experience in the Profile Menu, linked this to an ajax call to generate tabs dynamically
+
+
+APR 8
+Document Group Work
+2 hrs
+Worked on the Credentials Storage
+Added the credentials To a file in the C:/ Directory and added include statements to point to them from the configuration file. 
+Did this to prevent credentials from appearing in the Github repository. 
+Also planned out how to initialize the system via an _admin/install.php script
+
+
+APR 10
+Document Group Work
+3 hrs
+Worked on the Specification Document
+Designed the API format and communication method
+
+
+APR 15 2014
+API - STAGE 1 - The Interface
+8 hrs
+Develoed the API JSON parsing interface
+Developed the functions to receive and parse the json strings that will be sent to the API. 
+Currently a POST request with the variable JSON will be accepted. 
+The functions can validte the JSON string. The functions sort the string of operations based on the order assigned to them. 
+It performs each operation individually until completion or the first failure and then reurns the results. 
+The functions are not yet integrated with the API as the individual calls are not established, but they are associated to a dummy function that will alway return success. 
+Once the API is developed a switch case of options and individual validation needs to be performed and the API itself will be functional. 
+
+APR 16 2014
+8 hrs
+API - STAGE 2 - Core Interface Methods
+interface now handles POST and GET JSON requests. 
+API was Integrated into the interface (dummy functions in place for testing). 
+Added LIST , SYNTAX , and WGT Methods to interface. 
+	API 	- states wether the system is on, in case other methods fail
+	LIST 	- Displays all existing public methods in the API, this does not mean they are available to be called
+	SYNTAX 	- reports badly formatted JSON
+	WGT 	- allows for HTML widgets to be returned in the json string expect the HTML to either be the widget or blank during the return. 
+Tested for bugs extensively, interface handles badly formatted, incomplete, and correct JSON requests. 
+
+APR 17 2014
+2 hrs
+API - STAGE 2 - Core Interface Methods
+convert manuall JSON to json encode
+API now uses PHP native JSON encoding rather than manually written JSON formatting
+
+APR 17 2014
+2 hrs
+Group Meeting
+
+
+
+

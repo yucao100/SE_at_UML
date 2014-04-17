@@ -1,6 +1,6 @@
 <?php
 	
-	$WGT[ 'OBJ' ]->profileStart() ;
+	/*$WGT[ 'OBJ' ]->profileStart() ;
 	
 		$WGT[ 'OBJ' ]->profileNameCardStart() ;
 			$WGT[ 'OBJ' ]->profilePicture() ;
@@ -16,7 +16,7 @@
 			$WGT[ 'OBJ' ]->profileGraphs() ;
 		$WGT[ 'OBJ' ]->profileGraphsEnd() ;
 		
-	$WGT[ 'OBJ' ]->profileEnd() ;
+	$WGT[ 'OBJ' ]->profileEnd() ;*/
 	
 	include( $WGT[ 'SRC' ].'profile.php' ) ;
 	
