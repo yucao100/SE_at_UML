@@ -8,6 +8,7 @@
 			
 			public function __construct( ) {}
 			
+			
 			// MYSQL FUNCTIONS
 			
 			/**
@@ -21,7 +22,7 @@
 			 * @return	1		explain
 			 * 
 			 * @throws
-			 */ 
+			 */
 			private function mysqlAdd( $database , $table , $field , $value ) {
 			
 				//  CHANGE LOG
@@ -67,7 +68,7 @@
 			
 			// COMMENT FUNCTIONS
 			
-			public function commentAdd( $user , $target , $comment ) {}
+			public function commentAdd() {}
 					
 			public function commentDrop() {}
 			
@@ -79,4 +80,5 @@
 		}
 	
 	}
+	
 ?>

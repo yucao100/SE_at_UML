@@ -1,10 +1,12 @@
 <?php
-	// Application Information
-
-
+	// File Access Guard
+	define('CONTENT_GUARD', TRUE);
+	
+	// Error reporting
+	$A[ 'ERRORS' ] = true ;
+	
+	
 	// Application Address
-	
-	
 	if( $_SERVER['HTTP_HOST'] == 'josefflores.com' || 
 	    $_SERVER['HTTP_HOST'] == 'www.josefflores.com' ) { 				//<------ ADD THIS if statement for every server so that it runs without having to change the configuration file everytime
 			
@@ -52,8 +54,7 @@
 	//Icon Sets	
 	$A[ 'ToolbarMenuIcons' ] = $A[ 'W_IMG' ].'jquery-ui/' ;
 	
-	// File Access Guard
-	define('CONTENT_GUARD', TRUE);
+	
 
 	
 ?>

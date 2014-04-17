@@ -1,6 +1,6 @@
 <?php 	
-	// require_once( $A[ 'D_API' ].'index.php') ;
-	// require_once( $A[ 'D_LIB' ].'index.php') ;
+	// require_once( $A[ 'D_API' ].'api.php') ;
+	require_once( $A[ 'D_LIB' ].'library.php') ;
 	
 	// $user = new session() ;
 	
