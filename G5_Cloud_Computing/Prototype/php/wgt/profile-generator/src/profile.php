@@ -1,15 +1,15 @@
 
-	<div class="profile-generator">
+	<div class='profile-generator'>
 	
-		<div class="profile-generator-left">
+		<div class='profile-generator-left'>
 		
-			<div class="profile-generator-id">
+			<div class='profile-generator-id'>
 			
-				<div class="profile-generator-picture">
-					<image src="profile-generator-pic" />
+				<div class='profile-generator-picture'>
+					<image src='profile-generator-pic' />
 				</div>
 				
-				<div class="profile-generator-name-card">
+				<div class='profile-generator-name-card'>
 					<table>
 					
 						<tr>
@@ -52,40 +52,40 @@
 				
 			</div>
 			
-			<div class="profile-generator-input">
+			<div class='profile-generator-input'>
 				<h3>Log</h3>
-				<textarea class="profile-generator-input" ></textarea>
-				<button style="float:right;">Post</button>
+				<textarea class='profile-generator-input' ></textarea>
+				<button style='float:right;'>Post</button>
 			</div>
 			
-			<div class="profile-generator-log">
+			<div class='profile-generator-log'>
 			
-				<div class="profile-generator-log-entry">
+				<div class='profile-generator-log-entry'>
 				</div>
 				
-				<div class="profile-generator-log-entry">
+				<div class='profile-generator-log-entry'>
 				</div>
 				
-				<div class="profile-generator-log-entry">
+				<div class='profile-generator-log-entry'>
 				</div>
 				
 			</div>
 		
 		</div>
 			
-		<div class="profile-generator-center"></div>
+		<div class='profile-generator-center'></div>
 
-		<div class="profile-generator-right">
+		<div class='profile-generator-right'>
 		
-			<div class="profile-generator-graph">
+			<div class='profile-generator-graph'>
 			Graph
 			</div>
 			
-			<div class="profile-generator-graph">
+			<div class='profile-generator-graph'>
 			Graph
 			</div>
 			
-			<div class="profile-generator-graph">
+			<div class='profile-generator-graph'>
 			Graph
 			</div>
 			

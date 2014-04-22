@@ -1,14 +1,14 @@
-Information ------------------------------------------------------------
-Authors				AuthorName
-Created				Date
-License				License Type
-Name				WGTName
-Purpose				Description
-
-Changelog --------------------------------------------------------------	
-Date				Action
-03/27/14			Created current directory structure and added
-					content expalanations
+/**
+ *  @File			dirStructure.txt
+ * 	@Authors		Jose Flores
+ * 					jose.flores.152@gmail.com
+ * 	
+ * 	@Description	This is the directory structure map
+ * 
+ * 	@changelog		
+ *	03/27/14		Created current directory structure and added
+ *					content expalanations
+ */
 
 Content ----------------------------------------------------------------	
 
@@ -65,15 +65,20 @@ Content ----------------------------------------------------------------
 | 
 + www/  					- holds the web visible documents
    + _api 					- holds files related to api access
-   |  + index.php			- the ajax call handler
+   |  + index.php			- the landing page includes libraries and configurations, determines content page
+   |  + content.php			- the ajax call handler
+   |  + localLib.php		- this file holds the root finding function
    | 
    + _com 					- holds common files such as javascript, css, and image files
    |  + css					- contains the css files
    |  + fonts				- contains the font files
    |  + img					- contains the image files
    |  + js					- contains the js files
-   |     + lib				- user defined libraries
-   | 	   + onload.js		- the onload file
+   |     + lib/
+   | 	 | 	+ library.js	- user defined js library
+   | 	 | 	* wgt-lib		- the widget libraries
+   |     | 
+   | 	 + onload.js		- the onload file
    | 
    + _portal 				- the non regular acces points such as admin. developer access
    |  + admin				- the administrative portal
@@ -82,8 +87,10 @@ Content ----------------------------------------------------------------
    + * /					- the web pages 
    |  + index.php			- the landing page includes libraries and configurations, determines content page
    |  + content.php			- the content page contains the templates content contains a define guard for illegal acces
+   |  + localLib.php		- this file holds the root finding function
    | 
    + index.php				- the HOME page includes libraries and configurations, determines content page
    + content.php			- the content page contains the templates content contains a define guard for illegal acces
+   + localLib.php			- this file holds the root finding function
    + .htaccess				- server configuration file for webpage access
 

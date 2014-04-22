@@ -1,62 +1,21 @@
-div.profile-generator { 
-		float : left ;
-		width : 100% ;
-		height : 100% ;
-		min-width : 1100px ;
-	}
-
-div.profile-generator-left {
-		float: left;
-		height: 100%;
-		width : 500px;
-		padding:10px;
-	}
-
-div.profile-generator-id { 
-		float : left ;
-		width : 100% ;
-	}
-
-div.profile-generator-picture { 
-		float : left ;
-		border : 1px solid #999999 ; 
-		padding : 5 px ; 
-		width : 200px ; 
-		height : 300px ;
-	}
-	
-div.profile-generator-picture image {
-		float : left ;
-		width : 200px ; 
-		height : 300px ; 
-	}
-	
-div.profile-generator-name-card {}
-					
-		
-div.profile-generator-input {}
-textarea.profile-generator-input {
-		width: 500px;
-		height: 100px;
-	}
-			
-div.profile-generator-log {}
-			
-div.profile-generator-log-entry	{}
-
-div.profile-generator-center {
-		float : left ;
-		margin : 10px 0px 10px 0px ;
-		height : 100% ;
-		width : 1px ;
-		background : #ddd ;
-	}
-div.profile-generator-right {
-		float : left ;
-		padding : 10px ;
-		height : 100% ;
-	}
-		
-div.profile-generator-graph {}
-			
-	
+/**
+ *  @File			profile-generator.css
+ * 	@Authors		Jose Flores
+ * 					jose.flores.152@gmail.com
+ * 	
+ * 	@Description	This is the profile-generator CSS file it 
+ * 
+ * 	@changelog		
+ * 	4/20/14			compressed with all options via 
+ * 					http://www.csscompressor.com/, 
+ * 					note that the gradients cannot be compressed
+ */
+ 
+div.profile-generator{float:left;height:100%;min-width:1100px;width:100%}
+div.profile-generator-left{float:left;height:100%;padding:10px;width:500px}
+div.profile-generator-id{float:left;width:100%}
+div.profile-generator-picture{border:1px solid #999;float:left;height:300px;padding:5px px;width:200px}
+div.profile-generator-picture image{float:left;height:300px;width:200px}
+textarea.profile-generator-input{height:100px;width:500px}
+div.profile-generator-center{background:#ddd;float:left;height:100%;margin:10px 0;width:1px}
+div.profile-generator-right{float:left;height:100%;padding:10px}

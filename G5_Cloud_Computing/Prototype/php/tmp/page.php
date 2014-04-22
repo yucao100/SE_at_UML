@@ -1,22 +1,25 @@
 <?php 	
-	// require_once( $A[ 'D_API' ].'api.php') ;
-	require_once( $A[ 'D_LIB' ].'library.php') ;
-	
-	// $user = new session() ;
-	
-	// $user.init() ;
-	// $user.validate()	; 
-	
+	/**
+	 *  @File			page.php
+	 * 	@Authors		Jose Flores
+	 * 					jose.flores.152@gmail.com
+	 * 	
+	 * 	@Description	This is the application template
+	 * 
+	 * 	@changelog		
+	 *	2/25/14			Created Template
+	 */
+		
 	echo '<html>
 	
 			<head>' ;
-	
+				
 				include( $A[ 'D_HEAD' ].'index.php' ) ;
 				
 	echo 	'</head>
 	
 			 <body>
-			 
+
 				<div id="page">
 				
 					<div class="header">

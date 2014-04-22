@@ -1,3 +1,11 @@
+/**
+ *  @File			log.txt
+ * 	@Authors		Jose Flores
+ * 					jose.flores.152@gmail.com
+ * 	
+ * 	@Description	This is my log of actions.
+ */
+	 
 APR 4
 Group Meeting
 2 hrs
@@ -58,8 +66,36 @@ API now uses PHP native JSON encoding rather than manually written JSON formatti
 
 APR 17 2014
 2 hrs
-Group Meeting
+Group Meeting - Discussed api, standardized format and changed some formatting. Worked on Github errors and pushed most current build.
 
+APR	18 2014
+6 hrs
+Fixed API to meet Group discussion and performed bug testing to handle differently formatted JSON code.
 
+APR 19 2014
+6 hrs
+Changed aPI function names to best reflect what they were doing.
+the WGT function now can list widget, It does this dynamically adds widgets as they are added to the folder astructure
+methods 
+	getMethodList	- returns [200 and public Method List ]
+	getWidget		- needs parameters [ widgetName, { optional Argv } ] , returns [200 and widget], 400, 404 appropriately 
+	isBadSyntax		- returns 400
+	isNotAllowed	- Returns 405
+	isNotFound		- Returns 404 
+	isSuccess		- Returns 200 and 204 successmessages appropriately
+
+4/20/14 
+6hrs
+restructured index files to allow for self finding
+created localLib and moved all other functions to the library page
+restructured developer tools
+disabled widget tool, until it can use the json api for communication
+
+4/21/14
+6hrs
+commented all files
+added file headers
+bug tested work from yesterday and today
+updated functions to be passing json headers and json files rather than strings
 
 
