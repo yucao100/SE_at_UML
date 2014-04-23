@@ -27,7 +27,7 @@
 	 * Reserved Orders
 	 * 		[-INF , 0 ] 
 	 * 
-	 * For a list of available calls use LIST as the call value
+	 * For a list of available calls use getMethodList as the call value
 	 * 
 	 * Example JSON string 
 	 * 

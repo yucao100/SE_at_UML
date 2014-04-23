@@ -36,6 +36,9 @@
 	//	Including the application configuration file
 	include( $A[ 'D_INI' ].'config.php' ) ;
 
+	//	Including the mysql configuration file
+	include( $A[ 'D_INI' ].'mysql.php' ) ;
+	
 	//	Error reporting true for on false for off
 	//	This triggers error 500 failure for AJAX calls
 	errorsOn( false ) ;

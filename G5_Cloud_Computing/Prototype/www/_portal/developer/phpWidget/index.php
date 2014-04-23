@@ -38,7 +38,7 @@
 
 	//	Error reporting true for on false for off
 	//	This triggers error 500 failure for AJAX calls
-	errorsOn( false ) ;
+	errorsOn( true ) ;
 	
 	//  Begin page processing
 	include( './content.php' ) ; 

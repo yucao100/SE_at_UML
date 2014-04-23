@@ -18,7 +18,6 @@ Worked on the Website
 Worked on the registration and profile sections
 Added dummy login fields to be linked later to the API, as well as integrated Jquery ui to give a tab experience in the Profile Menu, linked this to an ajax call to generate tabs dynamically
 
-
 APR 8
 Document Group Work
 2 hrs
@@ -27,13 +26,11 @@ Added the credentials To a file in the C:/ Directory and added include statement
 Did this to prevent credentials from appearing in the Github repository. 
 Also planned out how to initialize the system via an _admin/install.php script
 
-
 APR 10
 Document Group Work
 3 hrs
 Worked on the Specification Document
 Designed the API format and communication method
-
 
 APR 15 2014
 API - STAGE 1 - The Interface
@@ -98,4 +95,11 @@ added file headers
 bug tested work from yesterday and today
 updated functions to be passing json headers and json files rather than strings
 
-
+4/23/14
+5hrs
+Looked up https, ssl certificates, and methods for implementation on  iis server and apache server
+http://stackoverflow.com/questions/5065281/how-to-enable-ssl-in-wamp-server
+fixed the developer tool so that it follows the same structure as all the other pages
+added mysql configuration
+updated server to hold latest version, tested to make sure there were no issues. 
+application paths self detected after updating alias. had to update alias to compensate for extra prototype directory. 

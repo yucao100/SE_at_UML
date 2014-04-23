@@ -367,15 +367,15 @@
 	}
 	
 	/**
-	 * 	printCSVArray
+	 * 	getCSVArray
 	 * 
 	 * 	This function breaks appart a string of CSV and creates a table 
 	 * 	row from them.
 	 * 
 	 * 	@param	$arg		The argument string to break up
 	 * 
-	 * 	@return null		An empty row
-	 * 	@retrun $ret		The created row
+	 * 	@return null		An empty array
+	 * 	@retrun $ret		An array with all CSV elements
 	 */
 	function getCSVArray( $arg ) {
 		// 	Check for arguments
@@ -387,14 +387,31 @@
 			else 
 				$out = $arg ;
 		
-			//	create the row
-			$ret = '<tr><th>'.$title.'</th><td>'.strip( print_r( $out ) , '1' ).'</td></tr>' ;
-			
 			// 	return the row
-			return $ret ;
+			return $out ;
 		}
 		// 	return an empty row
 		return NULL ;
+	}
+
+	/**
+	 *	getDevRow
+	 * 
+	 * 	This function takes a CSV input and turns it into a table row
+	 * 
+	 * 	@param	$title		The th element
+	 * 	@param	$args 		the td element
+	 * 
+	 * 	@return null		No row
+	 * 	@return 			The table row
+	 */
+	function getDevRow( $title , $args ) {
+		$rtn = '' ;
+		//	create the row
+		if ( ( $out = getCSVArray( $args ) ) != null ) {
+			 $rtn =  '<tr><th>'.$title.'</th><td>'. trim( $out , '1' ) .'</td></tr>' ;
+		}
+		return $rtn ;
 	}
 	
 	/**
@@ -427,7 +444,7 @@
 		$ret .= getDevHeadSrc( $A , 'JS' , $argJS ) ;
 		
 		//	Load the onload function
-		$ret .= '<script src="'.$A['W_JS_LIB'].'onload.js"></script>' ;
+		$ret .= '<script src="'.$A['W_JS'].'onload.js"></script>' ;
 		
 		//	Return generated head
 		return $ret ;
@@ -449,9 +466,9 @@
 		$ret = '' ;
 		
 		// checking to make sure text got passed and not null
-		if ( $arg != NULL ) {
+		if ( $args != NULL ) {
 			//	Break up array
-			$out = explode( ',' , $arg ) ; 	
+			$out = explode( ',' , $args ) ; 	
 			// 	Include each JS file
 			foreach ( $out as $i )
 				//	Generating a JS include

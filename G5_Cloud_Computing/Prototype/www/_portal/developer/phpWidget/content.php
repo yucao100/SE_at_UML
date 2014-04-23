@@ -18,52 +18,28 @@
 		header( 'Location: ./' ) ;
 		
 	// Content begin
-
-	//echo 'test' ;
-	////
-	//	INCLUDES
-	////
-	
-	// 	Include the configuration File
-	//define('__ROOT__', 
-	//echo dirname(dirname(__FILE__));//); 
-	
-	echo ';'.realpath(__DIR__) ;
-	//require_once(__ROOT__.'/config.php'); 
-	/*$A[ 'CURRENT' ] = __DIR__ ;
-	require_once( '\\..\\ini\\config.php' ) ;
-	require_once( '\\..\\php\\lib\\library.php' ) ;
-	require_once( '\\..\\ini\\paths.php' ) ;
-	*/
-	//require_once( $path ) ;
-	
-	/*
-	//	Force Errors
-	$A_[ 'ERROR' ] = true ;
-	
-	// 	Set Content Variable
-	$A[ 'CONTENT' ] = 'content.php' ;
-	
-	//	Include the library
-	require_once( $A[ 'D_LIB' ] ) ;
-
+	if ( !isset( $_GET[ 'wgt' ] ) &&  
+		 !isset( $_GET[ 'man' ] ) ) 
+			header( 'Location: ./?man' ) ;
 		
 	////
 	//	PARAMETER PARSING
 	////
 	
 	//	wgt name	
-	if( isset( $_GET[ 'wgt' ] ) )  
+	if( isset( $_GET[ 'wgt' ] ) )  {
 		$WGT[ 'WGT' ] = $_GET[ 'wgt' ] ;
-	else 
+		$WGT[ 'CSS' ] = $_GET[ 'wgt' ].'.css' ;
+	}
+	else {
 		$WGT[ 'WGT' ] = NULL ;
+		$WGT[ 'CSS' ] = NULL ;
+	}
 	
 	//	css files to use	
 	if( isset( $_GET[ 'css' ] ) )  
 		$WGT[ 'CSS' ] = $_GET[ 'css' ] ;
-	else 
-		$WGT[ 'CSS' ] = NULL ;
-	
+		
 	//	javascript file to use	
 	if( isset( $_GET[ 'css' ] ) )  
 		$WGT[ 'JS' ] = $_GET[ 'js' ] ;
@@ -84,14 +60,12 @@
 		
 	
 	
-	/*
 	echo '<html>
 			<head>' ;
 	
-	printJS( $A , $WGT[ 'JS' ] ) ;
-	printCSS( $A , $WGT[ 'CSS' ] ) ;
-	
-	echo '</head><body class="dev"><div class="tools"><br/>DEVELOPER TOOL: WGT <br/><br/><table class="wgt">' ;
+	echo getDevHead( $A , $WGT[ 'CSS' ] , $WGT[ 'JS' ] ) ;
+		
+	echo '</head><body class="dev"><div class="tools"><p>DEVELOPER TOOL: WGT</p><table class="wgt">' ;
 						
 	if ( isset( $_GET[ 'man' ] ) ) {
 		
@@ -104,56 +78,59 @@
 					<th>wgt</th>
 					<td>TRUE</td>
 					<td>The name of the widget to view</td>
-					<td> ... /PHPwgt.php?wgt=toolbar-menu</td>
+					<td> /?wgt=toolbar-menu</td>
 				 </tr>
 				 <tr>
 					<th>man</th>
 					<td></td>
 					<td>Brings up the manual</td>
-					<td> ... /PHPwgt.php?man</td>
+					<td> /?man</td>
 				 </tr>
 				 <tr>
 					<th>css</th>
 					<td></td>
-					<td>Sets optional css files to use, will take a comma separated list.</td>
-					<td> ... /PHPwgt.php?wgt=toolbar-menu&css=toolbar-menu.css,main.css</td>
+					<td>Sets optional css files to use, will take a CSV list.</td>
+					<td> /?wgt=toolbar-menu&css=toolbar-menu.css,main.css</td>
 				 </tr>
 				 <tr>
 					<th>cfg</th>
 					<td></td>
-					<td>Sets an alternate configuration files to use,default is config.php found in the widget.</td>
-					<td> ... /PHPwgt.php?wgt=toolbar-menu&cfg=config.php</td>
+					<td>Sets an alternate configuration file to use,default is config.php found in the widget.</td>
+					<td> /?wgt=toolbar-menu&cfg=config.php</td>
 				 </tr>
 				 <tr>
 					<th>argv</th>
 					<td></td>
 					<td>Sets optional run time parametrs to use, widget must be set to use them. Will take a comma separated list.</td>
-					<td> ... /PHPwgt.php?wgt=toolbar-menu&argv=1,2,3,4</td>
+					<td> /?wgt=toolbar-menu&argv=1,2,3,4</td>
 				 </tr>
-			</table>LIST OF WIDGETS<br/>' ;
-			
-		$item = getDirectoryList( $A , $A[ 'D_WGT' ] ) ;
-		foreach( $item as $entryName )
-			echo $entryName , '<br/>' ;
-				
-		echo '<br/></div>' ;
+				<tr>
+					<th>List of Widgets</th>
+					<td><ul>';
+						$item = getDirectoryList( $A , $A[ 'D_WGT' ] ) ;
+						foreach( $item as $entryName )
+							echo '<li>' , $entryName , '</li>' ;
+					
+				echo '</ul></td>
+					<td></td>
+					<td></td>
+				</tr>' ;
 
 	}
 	else if ( isset( $_GET[ 'wgt' ] ) ) {
 		
-		$WGT[ 'WGT' ] 		=  printArray( 'WGT' , $_GET[ 'wgt' ] ) ;
-		$WGT[ 'PATH' ] 		=  printArray( 'PATH' , $A[ 'D_WGT' ].$_GET[ 'wgt' ].'/index.php' ) ;
-		$WGT[ 'CSS' ] 		=  printArray( 'CSS' , $WGT[ 'CSS' ] ) ;
-		$WGT[ 'CONFIG' ] 	=  printArray( 'CFG' , $WGT[ 'CONFIG' ] ) ;
-		$WGT[ 'ARGV' ] 		=  printArray( 'ARGV' , $WGT[ 'ARGV' ] ) ;
-			
-		echo 	'</table><br/></div>' ;
-		
-		include ( $A[ 'D_WGT' ].$_GET[ 'wgt' ].'/index.php' ) ;
+		echo getDevRow( 'WGT' , $_GET[ 'wgt' ] ) ;
+		echo getDevRow( 'PATH' , $A[ 'D_WGT' ].$_GET[ 'wgt' ].'\\index.php' ) ;
+		echo getDevRow( 'CSS' , $WGT[ 'CSS' ] ) ;
+		echo getDevRow( 'CFG' , $WGT[ 'CONFIG' ] ) ;
+		echo getDevRow( 'ARGV' , $WGT[ 'ARGV' ] ) ;
 		
 	}
 	
-	else header( 'Location: '.$A[ 'W_ROOT' ].'_portal/developer/test/PHPwgt.php?man' ) ;
+	echo '</table>' ;
 	
-	echo '</body></html>' ;*/
+	if ( isset( $_GET[ 'wgt' ] ) )
+		include ( $A[ 'D_WGT' ].$_GET[ 'wgt' ].'/index.php' ) ;
+		
+	echo '</body></html>' ;
 ?>
