@@ -1,0 +1,15 @@
+/**
+ *  @File			dev-tools.css
+ * 	@Authors		Jose Flores
+ * 					jose.flores.152@gmail.com
+ * 	
+ * 	@Description	This is the main CSS file for the dev-tools
+ * 
+ * 	@changelog		
+ * 	5/3/14			Created file
+ */
+ 
+body.dev{background:#ff9;margin:0;padding:0}
+
+div.developer-tool { width:100%; height:100%; color:#000;}
+table.wgt { color:#000 } 
