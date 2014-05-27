@@ -146,6 +146,7 @@ function toolbar_menu_item( item ) {
 		case '0' :
 			addTab();
 			break ;
+			
 		
 		// Do nothing
 		default : 

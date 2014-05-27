@@ -89,9 +89,9 @@
 			// 	This is a method to notify the user of an error in their 
 			//  API JSON syntax
 			case 'isBadSyntax' :
-			case '' :			
+			case '' :
 				return $apiObj->isBadSyntax() ;
-			
+				
 			// 404
 			case 'isNotFound' :
 				return $apiObj->isNotFound() ;
@@ -268,7 +268,7 @@
 		$result = apiCall( $A , $tmp['call'] , $tmp['parameter'] ) ;
 		
 		// generate json result				
-		$json = array( "order" => $tmp['order'] , "code" => $result['code'] , "values" => $result['return'] ) ;
+		$json = array( "order" => $tmp['order'] , "code" => $result['code'] , "value" => $result['return'] ) ;
 		
 		// return json string
 		return $json ; 
@@ -380,13 +380,12 @@
 	function getCSVArray( $arg ) {
 		// 	Check for arguments
 		if ( isset( $arg ) ) {
-			//	break up the comma seperated values
-			if ( strpos( $arg ,',') == true ) 
-				$out = explode( ',' , $arg ) ; 	
-			// 	only one item in the array 
+			if ( !is_array( $arg ) && 
+				 strpos( $arg ,',') == true ) 
+					$out = explode( ',' , $arg ) ; 	
 			else 
 				$out = $arg ;
-		
+				
 			// 	return the row
 			return $out ;
 		}
@@ -409,7 +408,7 @@
 		$rtn = '' ;
 		//	create the row
 		if ( ( $out = getCSVArray( $args ) ) != null ) {
-			 $rtn =  '<tr><th>'.$title.'</th><td>'. trim( $out , '1' ) .'</td></tr>' ;
+			 $rtn =  '<tr><th>'.$title.'</th><td>'. var_inspect( $out ) . '</td></tr>' ;
 		}
 		return $rtn ;
 	}
@@ -480,6 +479,17 @@
 		} 
 		// 	Returning the string
 		return $ret ;
+	}
+	
+	/**
+	 * var_inspect
+	 * 
+	 */
+	 function var_inspect( $var ) {
+		ob_start() ;
+		var_dump( $var );
+		$result = ob_get_clean() ;
+		return $result ;
 	}
 
 ?>

@@ -17,13 +17,12 @@
 		header( 'Location: ./' ) ;
 		
 	// Content begin
+	$WGT[ 'CONFIG' ] = 'profile-generator.php' ;
 	include( $A[ 'D_WGT' ].'toolbar-menu/index.php' ) ;
 				
 	echo 	'<div class="profile">' ;
 			
 				include( $A[ 'D_WGT' ].'toolbar-tabs/index.php' ) ;
 
-				//include( $A[ 'CONTENT' ] ) ;
-				
 	echo 	'</div>' ;
 ?>

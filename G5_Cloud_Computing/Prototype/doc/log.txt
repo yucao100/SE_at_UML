@@ -103,3 +103,6 @@ fixed the developer tool so that it follows the same structure as all the other 
 added mysql configuration
 updated server to hold latest version, tested to make sure there were no issues. 
 application paths self detected after updating alias. had to update alias to compensate for extra prototype directory. 
+
+
+//UPATED CSR TRACKER with Above

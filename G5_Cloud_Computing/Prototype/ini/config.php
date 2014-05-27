@@ -8,6 +8,7 @@
 	 * 					file needs to be included before it is.
 	 * 
 	 * 	@changelog		
+	 *  5/3/2014		Added developer mode
 	 *	4/21/14			Removed all path resolving and moved it to the 
 	 * 					paths.php configuration file, the root paths are 
 	 * 					now resolved in the index.php of the caller with 
@@ -17,5 +18,8 @@
 	 
 	// Error reporting
 	$A[ 'ERRORS' ] = true ;
+	
+	// Developer Mode
+	$A[ 'DEV' ] = false ;
 
 ?>

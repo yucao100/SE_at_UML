@@ -7,9 +7,13 @@
 	 * 	@Description	This is the application template
 	 * 
 	 * 	@changelog		
+	 * 	5/7/14			added obstart for redirect
 	 *	2/25/14			Created Template
 	 */
-		
+	
+	// to be able to redirect 
+	ob_start() ;	
+	
 	echo '<html>
 	
 			<head>' ;
@@ -22,26 +26,12 @@
 
 				<div id="page">
 				
-					<div class="header">
+					<div class="header">';
 					
-						<div class="navigation">
-						
-							<div class="logo">
+							$WGT[ 'CONFIG' ] = 'main-navigation.php' ;
+							include( $A[ 'D_WGT' ].'navigation-menu/index.php' ) ;
 							
-								<a href="' , $A[ 'W_ROOT' ] , '" >
-									
-									<img src="' , $A[ 'W_IMG' ] , '/logo/logo.png"/>
-									
-								</a>
-								
-							</div>';
-							
-								include( $A[ 'D_WGT' ].'navigation-menu/index.php' ) ;
-							
-					echo 	'
-					
-						</div>
-					</div>
+			echo 	'</div>
 				
 					<div class="main">' ;
 					

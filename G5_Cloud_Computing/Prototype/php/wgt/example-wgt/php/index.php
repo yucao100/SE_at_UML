@@ -9,9 +9,13 @@
 		define( 'exampleWgt' , TRUE ) ;
 		
 		class exampleWgt {
+			// private $config ;
+			// private $argv ;
+			// private $argc ;
+			// private $dir ;
 			
 			public function __construct( ) {
-			
+				//$this->config ;
 			}
 			
 		}

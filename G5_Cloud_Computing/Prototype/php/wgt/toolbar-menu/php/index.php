@@ -44,6 +44,11 @@
 			 * @param 	icon	the fully qualified address of the image or NULL
 			 * @param	link	the onclick function param
 			 * @param	title	the action title
+			 * 
+			 * changelog 
+			 * 5/7/14		Modified to accept enum value as an onclick 
+			 * 				or to generate an actual link if the value is 
+			 * 				a string
 			 */
 			public function item( $enum , $title , $pos = array() )  {
 					
@@ -58,7 +63,14 @@
 					
 					echo 	'<li> 
 								
-								<a class="toolbar-menu" onclick="toolbar_menu_item(\'' , $enum  , '\');">
+								<a class="toolbar-menu" ';
+						// 5/7/14
+						if ( is_string( $enum ) ) 					 
+							echo '	 onclick="window.location.replace(\'' , $enum  , '\');"' ;
+						else	
+							echo '	 onclick="toolbar_menu_item(\'' , $enum  , '\');"' ;
+
+						echo'>
 								
 									<div class="toolbar-menu-image" style="background-position:' , $pos['x'] , 'px ' , $pos['y']  , 'px;">
 										

@@ -11,13 +11,14 @@
 	 */
 	 
 	//	Credential Storage
-	$A[ 'M_CREDENTIALS' ] 	=	'C:\\mysql_credentials.php' ; 
-	include( $A[ 'M_CREDENTIALS' ] ) ; 
+	$A[ 'M_USR' ] 	= getenv( 'CSR_MYSQL_USR' ) ; 
+    $A[ 'M_PWD' ] 	= getenv( 'CSR_MYSQL_PWD' ) ;
 	 
 	// 	Initialization Database
-	$A[ 'M_SQL' ]			=	$A[ 'D_INI' ].'init.sql' ;
+	$A[ 'M_SQL' ]	= $A[ 'D_INI' ].'init.sql' ;
 	 
 	//	Database Information
-	$A[ 'M_DATABASE' ] 	=	'csr' ;
+	$A[ 'M_DB' ] 	= 'csr' ;
+    $A[ 'M_SERVER' ] = 'localhost' ;
 	 
 ?>

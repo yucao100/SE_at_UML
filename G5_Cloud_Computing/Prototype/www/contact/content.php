@@ -17,6 +17,7 @@
 		header( 'Location: ./' ) ;
 		
 	// Content begin
+	$WGT[ 'CONFIG' ] = 'website-contact.php' ;
 	include( $A[ 'D_WGT' ].'contact-form/index.php' ) ;
 
 ?>

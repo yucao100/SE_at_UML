@@ -1,5 +1,13 @@
 <?php 
-		echo '<div class="toolbar-menu">
+		echo '<div class="toolbar-menu" style="';
+			
+			if ( $WGT[ 'ARGC' ] > 0 ) 
+				echo ' background:' , $WGT[ 'ARGV' ][ 0 ] , ';' ;
+				
+			if ( $WGT[ 'ARGC' ] > 1  ) 
+				echo ' color:' , $WGT[ 'ARGV' ][ 1 ] , ';' ;
+			
+		echo '">
 	
 				<ul id="toolbar-menu-ul">' ;
 					
