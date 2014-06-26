@@ -15,37 +15,40 @@
 	// File Access Guard
 	define( 'CONTENT_GUARD' , TRUE ) ;
 	
+	////
+	//	RESOLVE PATHS
+	////
+	
 	// Load the local library for path resoloution
 	include( './localLib.php' ) ;
 	
 	// 	Resolve root paths
 	$A = getRoot( __DIR__ ) ;
 	
-	//	Set content for index
-	$A[ 'CONTENT' ] = 'content.php' ;
-	
 	// 	Including application navigation paths
 	include( $A[ 'D_ROOT' ].'ini\\paths.php' ) ;
 	
-	//	Including the application library
-	include( $A[ 'D_LIB' ].'library.php' ) ;
+	////
+	//	INCLUDES
+	////
+	$A[ 'SECURE' ] = false ;
+	$A[ 'ACCESS' ] = array( 'DEV' ) ;	
+	include( $A[ 'D_TMP' ].'includes.php' ) ;
 
-	//	Including the application api
-	include( $A[ 'D_API' ].'api.php' ) ;	
-		
-	//	Including the application configuration file
-	include( $A[ 'D_INI' ].'config.php' ) ;
+	////
+	//	FUNCTION TRIGGERS	
+	////
 
-	// Configuration OverRides
-	$A[ 'DEV' ] = true ;
-	
 	//	Error reporting true for on false for off
-	//	This triggers error 500 failure for AJAX calls
-	errorsOn( true ) ;
+	errorsOn( false ) ;
+
+	////
+	//	PAGE CALLING
+	////
 	
 	//	Set content for index
 	$A[ 'CONTENT' ] = 'content.php' ;
-	
+		
 	//  Begin page processing
 	include( $A[ 'D_TMP' ].'portal-developer.php' ) ; 
 	

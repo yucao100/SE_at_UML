@@ -31,7 +31,8 @@
 	////
 	//	INCLUDES
 	////
-	
+	$A[ 'SECURE' ] = false ;	
+	$A[ 'ACCESS' ] = array( 'ALL' ) ;
 	include( $A[ 'D_TMP' ].'includes.php' ) ;
 
 	////
@@ -47,7 +48,7 @@
 	
 	//	Set content for index
 	$A[ 'CONTENT' ] = 'content.php' ;
-	
+		
 	//  Begin page processing
 	include( $A[ 'D_TMP' ].'page.php' ) ; 
 	

@@ -4,5 +4,7 @@
 							array( $A[ 'W_ROOT' ] . 'about' , 'About' ) ,
 							array( $A[ 'W_ROOT' ] . 'contact' , 'Contact' ) ,
 							array( $A[ 'W_ROOT' ] . 'profile' , 'Profile' ) ,
-							array( $A[ 'W_ROOT' ] . 'register' , 'register/login' ) ) ;
+							array( $A[ 'W_ROOT' ] . 'register' , 'register' ) ,
+							array( $A[ 'W_ROOT' ] . 'login' , 'login' )
+							) ;
 ?>

@@ -1,0 +1,90 @@
+// REGISTER PARAMS
+	$param = array(	'USR_PHONE' => '508245749655' ,
+			  		'USR_SALT' => 'ABC123kk' ,
+			  		'USR_PEPPER' => 'THEHALL2' ,
+			  		'USR_TIMESTAMP' => '0123456789' ,
+					'USR_EMAIL' => 'amanda.flores.152@gmail.com' ,
+			  		'USR_PIN' => '982091'  ) ;
+	
+	
+	
+	// CREATE AN MFA DEVICE
+	//$mfa = new mfa( $A , $param ) ;
+
+	// ACTIONS
+	//echo $mfa->manage( 'REGISTER' ) ;
+	//echo $mfa->manage( 'ACTIVATE' ) ;
+	//echo $mfa->manage( 'AUTHENTICATE' ) ;
+	//	echo $mfa->manage( 'CLEAN' ) ;
+
+	
+	/*
+		Android sends registration request
+		
+			JSON = 	[ 
+						{ 
+							"order" : 1 , 
+							"call" : "registerMFA" ,  
+							"parameter" : {
+								"USR_PHONE" : "val",
+								"USR_EMAIL" : "val",
+								'USR_SALT' : "val",
+								'USR_PEPPER' : "val",
+								'USR_TIMESTAMP' : "val"
+							}
+						} 
+						
+					]
+						
+		cloud sends email with activation pin 
+		
+		user enters pin from email into android device
+		
+		Android sends activation request
+		
+			JSON = 	[ 
+						{ 
+							"order" : 1 , 
+							"call" : "activateMFA" ,  
+							"parameter" : {
+								"USR_PHONE" : "val",
+								"USR_EMAIL" : "val",
+								'USR_PIN' : "val"
+							}
+						} 
+						
+					]		
+				
+		Phone attempts first verification
+			To generate token	
+		
+				createToken( $precision = 15 , $i = 0 ) {
+					
+					return hash( $encryption , 
+								 $mfa_device_salt . 
+								 $mfa_device_date . 
+								 (int) ( ( time() + ( $i * $precision ) ) / $precision ) . 
+								 $mfa_device_pin . 
+								 $mfa_device_pepper ) ;
+				
+				}
+			 
+			Phone Sends
+				JSON = 	[ 
+							{ 
+								"order" : 1 , 
+								"call" : "authenticateMFA" ,  
+								"parameter" : {
+									"USR_PHONE" : "val",
+									"USR_TOKEN" : "val"
+								}
+							} 
+							
+						]	
+				
+		Android recieves
+			200 => succes
+		
+		try again 
+			failure
+*/

@@ -11,8 +11,8 @@
  * 					http://www.csscompressor.com/, 
  * 					note that the gradients cannot be compressed
  */
- 
-body{background:#fff;font-family:"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;margin:0;padding:0}
+html {font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;} 
+body{background:#fff;font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;margin:0;padding:0}
 a{color:#000;cursor:pointer;display:block;text-decoration:none}
 th{font-weight:700}
 

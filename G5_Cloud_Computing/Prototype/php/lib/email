@@ -1,0 +1,55 @@
+<?php
+	class email {
+		
+		private $A ;
+		
+		public function __construct( $A ) {
+			$this->A = $A ;
+		}
+		
+		public function send( $EMAIL , $FROM , $TO ) {
+			
+			require $this->A[ 'D_LIB' ] .'PHPMailer/PHPMailerAutoload.php';
+			
+			$mail = new PHPMailer;
+
+			// SMTP
+			$mail->isSMTP() ;                          		// Set mailer to use SMTP
+			$mail->Host 		= $EMAIL[ 'SMTP_HOST' ] ;  	// Specify main and backup SMTP servers
+			$mail->SMTPAuth 	= true ;               		// Enable SMTP authentication
+			$mail->Username 	= $EMAIL[ 'SMTP_USR' ] . '@' . 
+								  $EMAIL[ 'SMTP_DOMAIN' ] ; // SMTP username
+			$mail->Password 	= $EMAIL[ 'SMTP_PWD' ] ;    // SMTP password
+			$mail->SMTPSecure 	= 'tls' ;              		// Enable encryption, 'ssl' also accepted
+
+			// FROM
+			$mail->From 		= $from[ 'EMAIL'  ;
+			$mail->FromName 	= $from[ 'NAME' ] ;
+			
+			// TO
+			foreach( $TO as $target ){
+				$mail->addAddress( 	$target[ 'email' ] , 
+									$target[ 'name' ] ) ;   
+			}
+			
+			// REPLY TO
+			$mail->addReplyTo( 	'msgs@' . $EMAIL[ 'SMTP_DOMAIN' ] , 
+								'Messages' ) ;
+			
+			// FORMATTING
+			$mail->WordWrap = 50 ; 	// Set word wrap to 50 characters
+			$mail->isHTML( true ) ;	// Set email format to HTML
+			
+			$mail->Subject = $EMAIL[ 'subject' ] ;
+			$mail->Body    = $EMAIL[ 'body' ] ;
+
+			if( !$mail->send( ) ) {
+				return  $mail->ErrorInfo;
+			} 
+			else {
+				return true ;
+			}
+		}
+	}
+	
+?>

@@ -22,6 +22,8 @@
          * 
          *  This is the token class it will be used to generate session 
          * 	tokens
+         * 
+         * 	$A		The application globals
          */
         class token {
             

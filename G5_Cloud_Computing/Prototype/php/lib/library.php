@@ -27,7 +27,7 @@
      * 	@param	$bool		This function turns on server php error 
      * 						reporting.
      */
-    function errorsOn( $bool ) {
+    function errorsOn( $bool = false ) {
 		
 		// 	Turning errors on
 		ini_set( 'display_errors' , 'On' ) ;
@@ -39,7 +39,7 @@
 		// 	Displaying all errors
 		error_reporting( E_ALL ) ;	
 	}
-	
+	errorsOn( $bool = true ) ;
 	////
 	//  FUNCTIONS
 	////
@@ -80,27 +80,25 @@
 			// 	the API's JSON syntax
 			case 'getWidget' :
 				return $apiObj->getWidget( $parameters ) ;
+				
+			case 'registerMFA' :
+				return $apiObj->registerMFA( $parameters ) ;
+				
+			case 'registerUser' :
+				return $apiObj->registerUser( $parameters ) ;
+				
+			case 'activateMFA' :
+				return $apiObj->activateMFA( $parameters ) ;
+				
+			case 'authenticateMFA' :
+				return $apiObj->authenticateMFA( $parameters ) ;
+				
+			case 'authenticateUser' :
+				return $apiObj->authenticateUser( $parameters ) ;
 			
-			// 	This is a hardcoded success return used to signify that 
-			// 	the interface is working
-			case 'isSuccess' : 
-				return $apiObj->isSuccess( 'API is available.' , null ) ;
-					
-			// 	This is a method to notify the user of an error in their 
-			//  API JSON syntax
-			case 'isBadSyntax' :
-			case '' :
-				return $apiObj->isBadSyntax() ;
-				
-			// 404
-			case 'isNotFound' :
-				return $apiObj->isNotFound() ;
-				
-			//	Method requested is not available			
-			case 'isNotAllowed' :
 			default :
 				// This is method not found
-				return $apiObj->isNotAllowed() ;
+				return $apiObj->setReturn( 405 , null , null ) ;
 		}
 	}
 	
@@ -244,8 +242,8 @@
 			// Send JSON malformed message
 			array_push( $result ,  processCall( $A , 
 									array( 'order' => 0 , 
-										  'call' => 'isBadSyntax' , 
-										  'parameter' => null ) ) ) ;
+										  'call' => 'setReturn' , 
+										  'parameter' => array( 400 , 'Is Bad Syntax.' , null ) ) ) ) ;
 		}
 		return json_encode( $result ) ;
 				
@@ -325,7 +323,7 @@
 	 *  @param 	$A			The application configuration
 	 * 	@param	$className	The name of the class to query
 	 * 
-	 * 	@return				The slphsbetically sorted array of public 
+	 * 	@return				The alphabetically sorted array of public 
 	 * 						methods
 	 */
 	function getPublicMethods( $A , $className ) {

@@ -1,0 +1,7 @@
+# Mandatory Environment Variables
+
+CSR_SMTP_USR
+CSR_SMTP_PWD
+
+CSR_MYSQL_USR
+CSR_MYSQL_PWD

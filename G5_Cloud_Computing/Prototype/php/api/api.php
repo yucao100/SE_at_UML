@@ -8,6 +8,8 @@
 	 * 					be included before it is.
 	 * 
 	 * 	@changelog		
+	 * 	6/24/14			removed success and failure functions added general
+	 * 					setReturn function
 	 * 	4/19/14			__construct, getWidgetInstance, getWidget, isSuccess
 	 * 					isNotAllowed, isNotFound, isBadSyntax, getMethodList
 	 * 					were finalized Version 1.
@@ -43,127 +45,129 @@
 				$this->A = $A ;
 			}
 			
-			private function apiLog(){}
-			
-			// MYSQL FUNCTIONS
-			
-			private function mysqlAdd() {}
+			/**
+			 * 	setReturn 
+			 * 
+			 * 	This function generates the return messages for the api
+			 * 
+			 * 	@param 	$num
+			 * 	@param 	$val
+			 * 	@param 	$content
+			 * 
+			 * 	@return the return message
+			 */
+			public function setReturn( $num , $val = null , $content = null ) {
+				switch ( $num ) {
 					
-			private function mysqlDrop() {}
-			
-			private function mysqlEdit() {}
-			
-			private function mysqlGet() {}
-			
-			private function mysqlAuthenticate() {}
-			
-			// USER FUNCTIONS
-			
-			private function userAdd() {}
+					//	Informational
 					
-			private function userDrop() {}
-			
-			private function userEdit() {}
-			
-			private function userGet() {}
-			
-			private function userLogin() {}
-			
-			private function userLogout() {}
+					case 100 : $values = array(	100 , 'Continue' ) ; break ;
+					case 101 : $values = array(	101 , 'Switching Protocols' ) ; break ;
+					case 102 : $values = array(	102 , 'Processing' ) ; break ;
+					
+					//	Success
+								
+					case 200 : $values = array(	200 , 'OK' ) ; break ;
+					case 201 : $values = array(	201 , 'Created' ) ; break ;
+					case 202 : $values = array(	202 , 'Accepted' ) ; break ;
+					case 203 : $values = array(	203 , 'Non-Authoritative Information' ) ; break ;
+					case 204 : $values = array(	204 , 'No Content' ) ; break ;
+					case 205 : $values = array(	205 , 'Reset Content' ) ; break ;
+					case 206 : $values = array(	206 , 'Partial Content' ) ; break ;
+					case 207 : $values = array(	207 , 'Multi-Status' ) ; break ;
+					case 208 : $values = array(	208 , 'Already Reported' ) ; break ;
+					case 226 : $values = array(	226 , 'IM Used' ) ; break ;
+					
+					//	Redirect
+								
+					case 300 : $values = array(	300 , 'Multiple Choices' ) ; break ;
+					case 301 : $values = array(	301 , 'Moved Permanently' ) ; break ;
+					case 303 : $values = array(	303 , 'See Other' ) ; break ;
+					case 304 : $values = array(	304 , 'Not Modified' ) ; break ;
+					case 305 : $values = array(	305 , 'Use Proxy' ) ; break ;
+					case 306 : $values = array(	306 , 'Switch Proxy' ) ; break ;
+					case 307 : $values = array(	307 , 'Temporary Redirect' ) ; break ;
+					case 308 : $values = array(	308 , 'Permanent Redirect' ) ; break ;
+					
+					// Client Error
+								
+					case 400 : $values = array(	400 , 'Bad Request' ) ; break ;
+					case 401 : $values = array(	401 , 'Unauthorized' ) ; break ;
+					case 402 : $values = array(	402 , 'Payment Required' ) ; break ;
+					case 403 : $values = array(	403 , 'Forbidden' ) ; break ;
+					case 404 : $values = array(	404 , 'Not Found' ) ; break ;
+					case 405 : $values = array(	405 , 'Method Not Allowed' ) ; break ;
+					case 406 : $values = array(	406 , 'Not Acceptable' ) ; break ;
+					case 407 : $values = array(	407 , 'Proxy Authentication Required' ) ; break ;
+					case 408 : $values = array(	408 , 'Request Timeout' ) ; break ;
+					case 409 : $values = array(	409 , 'Conflict' ) ; break ;
+					case 410 : $values = array(	410 , 'Gone' ) ; break ;
+					case 411 : $values = array(	411 , 'Length Required' ) ; break ;
+					case 412 : $values = array(	412 , 'Precondition Failed' ) ; break ;
+					case 413 : $values = array(	413 , 'Request Entity Too Large' ) ; break ;
+					case 414 : $values = array(	414 , 'Request-URI Too Long' ) ; break ;
+					case 415 : $values = array(	415 , 'Unsupported Media Type' ) ; break ;
+					case 416 : $values = array(	416 , 'Requested Range Not Satisfiable' ) ; break ;
+					case 417 : $values = array(	417 , 'Expectation Failed' ) ; break ;
+					case 422 : $values = array(	422 , 'Unprocessable Entity' ) ; break ;
+					case 423 : $values = array(	423 , 'Locked' ) ; break ;
+					case 424 : $values = array(	424 , 'Failed Dependency' ) ; break ;
+					case 426 : $values = array(	426 , 'Upgrade Required' ) ; break ;
+					case 428 : $values = array(	428 , 'Precondition Required' ) ; break ;
+					case 429 : $values = array(	429 , 'Too Many Requests' ) ; break ;
+					case 431 : $values = array(	431 , 'Request Header Fields Too Large' ) ; break ;
+					case 498 : $values = array(	498 , 'Token expired/invalid' ) ; break ;	
+					
+					// Server Errors
+					
+					case 501 : $values = array(	501 , 'Not Implemented' ) ; break ;
+					case 502 : $values = array(	502 , 'Bad Gateway' ) ; break ;
+					case 503 : $values = array(	503 , 'Service Unavailable' ) ; break ;
+					case 504 : $values = array(	504 , 'Gateway Timeout' ) ; break ;
+					case 505 : $values = array(	505 , 'HTTP Version Not Supported' ) ; break ;
+					case 506 : $values = array(	506 , 'Variant Also Negotiates' ) ; break ;
+					case 507 : $values = array(	507 , 'Insufficient Storage' ) ; break ;
+					case 508 : $values = array(	508 , 'Loop Detected' ) ; break ;
+					case 510 : $values = array(	510 , 'Not Extended' ) ; break ;
+					case 511 : $values = array(	511 , 'Network Authentication Required' ) ; break ;
+					default:
+					case 500 : $values = array(	500 , 'Internal Server Error' ) ; break ;
+				}
+
+				if ( $val != null ) array_push( $values , $val ) ;
+				
+				return array( 'code' => $values ,
+							  'return' => $content ) ;
+			}			
 			
 			/**
 			 * 	getWidgetInstance
 			 * 
 			 * 	this function fetches a widget instance
 			 * 
-			 * 	@param	$arr			The widget name and parameters
+			 * 	@param	$parameters		The widget name and parameters
 			 * 	
 			 * 	@catch	$e				Catches any exception
-			 * 							and then returns isNotFound
+			 * 							and then returns 404
 			 * 
-			 * 	@return isSuccess		The widget is found and being 
+			 * 	@return 200				The widget is found and being 
 			 * 							returned
-			 * 	@return isNotFound		An error occured and the widget 
-			 * 							could not be returned
+			 * 	@return 404				An error occured and the widget 
+			 * 							could not be found
 			 */
-			private function getWidgetInstance( $arr ) {
+			private function getWidgetInstance( $parameters ) {
+				if ( ! defined( 'CURRENT_USER_ID ' ) ) {
+					return $this->setReturn( 401 , null , null ) ;	
+				}
+				
 				try {
-					$widget = getWGT( $this->A , $arr ) ;
+					$widget = getWGT( $this->A , $parameters ) ;
 				}
 				catch ( Exception $e ) {
-					$this->apiLog( $arr , $e ) ;
-					return $this->isNotFound() ;					 
+					$this->apiLog( $parameters , $e ) ;
+					return $this->setReturn( 404 , null , null ) ;					 
 				}
-				
-				return $this->isSuccess( null , $widget ) ;
-			}
-			// GRAPHING FUNCTIONS
-			
-			
-			////
-			//	PUBLIC API METHODS
-			////
-			
-			// API MANAGEMENT FUNTIONS
-			
-			/**
-			 * 	isSuccess	
-			 * 
-			 * 	This function returns the appropriate success message as
-			 * 	the response
-			 * 
-			 * 	@param	$message		Additionsal $messages to add to 
-			 * 							the code
-			 * 	@param	$value			The values to return
-			 */
-			public function isSuccess( $message , $value ) {
-				
-				//  Setting success without response
-				if ( $message == null ) {
-					return array( 'code' => array( 200 , 'OK' ) , 
-								  'return' => $value ) ;
-				}
-				//  Setting success with response
-				else if ( $message != null )	{
-					return array( 'code' => array( 204 , 'No Content' , $message ) , 
-								  'return' => $value ) ;
-				}
-			}
-			
-			/**
-			 * 	isNotAllowed
-			 * 
-			 * 	This function returns a method not allowed message
-			 * 
-			 * 	@return 				405	JSON sting
-			 */
-			public function isNotAllowed( ) {
-				 return array( 'code' => array( 405 , 'Method Not Allowed' , 'A request was made using method that is not enabled by the API Interface, call getMethodList for existing API methods.') ,
-							   'return' => null ) ;
-			 }
-			
-			/**
-			 * 	isBadSyntax
-			 * 
-			 * 	This function returns a Bad request message
-			 * 
-			 * 	@return					400 JSON string
-			 */
-			public function isBadSyntax() {
-				return array( 'code' => array( 400 , 'Bad Request' , 'The request cannot be fulfilled due to bad syntax.' ) ,
-							  'return' => null ) ;
-			}
-			
-			/**
-			 * 	isNotFound
-			 * 
-			 * 	This function returns Not found message
-			 * 
-			 * 	@return					404 JSON message
-			 */
-			public function isNotFound() {
-				return array( 'code' => array( 404 , 'Resource Not Found' ) ,
-							  'return' => array( 'The requested resource could not be found but may be available again in the future.' ) ) ;
+				return $this->setReturn( 200 , null , $widget ) ;
 			}
 			
 			/**
@@ -176,8 +180,9 @@
 			 * 							available API methods
 			 */ 
 			public function getMethodList() {
+				
 				//	List of public methods that are needed but are not part of API
-				$blackList = array( '__construct' ) ;
+				$blackList = array( '__construct' , 'setReturn') ;
 				
 				$result = array( ) ;
 				
@@ -196,7 +201,163 @@
 						if ( !in_array( $item , $blackList ) )
 							array_push( $result , $item ) ;
 					
-				return $this->isSuccess( null , $result ) ;
+				return $this->setReturn( 200 , null , $result ) ;
+			}
+			
+			/**
+			 * 	registerMFA
+			 * 
+			 * 	This function registers an MFA device
+			 * 
+			 * 	@param $parameters		the fields needed 
+			 */
+			public function registerMFA( $parameters ) {
+				
+				if( !isset( $parameters[ 'USR_PHONE' ] ) &&
+					!isset( $parameters[ 'USR_EMAIL' ] ) &&
+					!isset( $parameters[ 'USR_SALT' ] ) &&
+					!isset( $parameters[ 'USR_PEPPER' ] ) &&
+					!isset( $parameters[ 'USR_TIMESTAMP' ] ) )
+						return $this->setReturn( 400 , null , null ) ;
+						
+				$mfa = new mfa( $A , $parameters ) ;
+				$tmp = $mfa->manage( 'REGISTER' ) ;
+				
+				if ( is_array( $tmp ) ) 			 
+					return $this->setReturn( 200 , null , $tmp ) ;
+				else if ( $tmp == 1 )
+					return $this->setReturn( 401 , 'User is not registered.' , null ) ;
+				else if ( $tmp == 2 )
+					return $this->setReturn( 401 , 'Device is already registered.' , null )  ;
+			}
+			
+			/**
+			 * 	registerUser
+			 * 
+			 * 	This function registers a user
+			 * 
+			 * 	JSON=[ { 
+			 * 			"order": 1,
+			 *      	"call": "registerUser",
+			 *    	    "parameter": [
+			 * 			    {
+			 * 	                "usr_email": "email",
+			 * 	                "usr_name_first": "john",
+			 * 		            "usr_name_middle": "fedrick",
+			 * 	                "usr_name_last": "doe",
+			 * 		            "usr_phone_country": "1",
+			 * 	                "usr_phone_area": "234",
+			 * 	                "usr_phone_number": "5556666",
+			 * 	                "usr_phone_ext": "4444",
+			 * 	                "usr_pwd_1": "Password1",
+			 * 	                "usr_pwd_2": "Password1",
+			 * 	                "usr_dob": "2007-12-31"
+			 *             }	        
+			 * 			]
+			 * 	    }
+			 * 	]
+			 * 		 
+			 * 	@param $parameters		the fields needed 
+			 *
+			 */
+			 public function registerUser( $parameters ) {
+				 if( !isset( $parameters[0][ 'usr_email' ] ) &&
+					 !isset( $parameters[0][ 'usr_name_first' ] ) &&
+					 !isset( $parameters[0][ 'usr_name_middle' ] ) &&
+					 !isset( $parameters[0][ 'usr_name_last' ] ) &&
+					 !isset( $parameters[0][ 'usr_phone_country' ] ) &&
+					 !isset( $parameters[0][ 'usr_phone_area' ] ) &&
+					 !isset( $parameters[0][ 'usr_phone_number' ] ) &&
+					 !isset( $parameters[0][ 'usr_phone_ext' ] ) &&
+					 !isset( $parameters[0][ 'usr_dob' ] ) &&
+					 !isset( $parameters[0][ 'usr_pwd_1' ] ) &&
+					 !isset( $parameters[0][ 'usr_pwd_2' ] ) ) 					
+						return $this->setReturn( 400 , null , null ) ;
+						
+				$user = new user( $this->A , $parameters[0] ) ;
+				$tmp = $user->manage( 'REGISTER' ) ;
+				
+				if ( $tmp === 0 ) {
+					// registration succesfull
+					return $this->setReturn( 200 , 'Registration succesful' , null ) ; 
+				}
+				// failure
+				return $this->setReturn( 500 , 'Registration Failed' , null ) ;
+			 }
+			 
+			 /**
+			 * 	authenticateUser
+			 * 
+			 * 	This function logs a user in
+			 * 
+			 * 	@param $parameters		the fields needed 
+			 */
+			 public function authenticateUser( $parameters ) {
+				 if( !isset( $parameters[0][ 'usr_email' ] ) &&
+					 !isset( $parameters[0][ 'usr_pwd_1' ] ) ) 					
+						return $this->setReturn( 400 , null , null ) ;
+						
+				$user = new user( $this->A , $parameters[0] ) ;
+				$tmp = $user->manage( 'LOGIN' ) ;
+
+				if ( $tmp === 0 ) {
+					// registration succesfull
+					$user->manage( 'SESSION' , 'START' ) ;
+					return $this->setReturn( 200 , array( 'Authentication succesful' , 'Session started' ) , null ) ; 
+				}
+				// failure
+				return $this->setReturn( 500 , 'Authentication failed' , $tmp ) ;
+			 }
+			 
+			/**
+			 * 	activateMFA ;
+			 * 
+			 * 	This function activates an MFA device
+			 * 
+			 * 	@param $parameters			the fields needed 
+			 */
+			public function activateMFA( $parameters) {
+				if( !isset( $parameters[ 'USR_PHONE' ] ) &&
+					!isset( $parameters[ 'USR_PIN' ] ) )
+						return $this->setReturn( 400 , null , null ) ;
+						
+				$mfa = new mfa( $A , $param ) ;
+				$tmp = $mfa->manage( 'ACTIVATE' ) ;
+				
+			
+				if ( $tmp == 0 ) 			 
+					return $this->setReturn( 204 , 'Device was Activated' , null ) ;
+				else if ( $tmp == 1 )
+					return $this->setReturn( 401 , 'User is not registered.' , null ) ;
+				else if ( $tmp == 2 )
+					return $this->setReturn( 403 , 'Device was Banned.' , null )  ;
+				else if ( $tmp == 3 )
+					return $this->setReturn( 400 , 'Device was not Activated.' , null )  ;
+			}
+			
+			/**
+			 * 	authenticateMFA ;
+			 * 
+			 * 	This function authenticates an MFA device
+			 * 
+			 * 	@param $parameters			the fields needed 
+			 */
+			public function authenticateMFA( $parameters) {
+				if( !isset( $parameters[ 'USR_PHONE' ] ) &&
+					!isset( $parameters[ 'USR_TOKEN' ] ) )
+						return $this->setReturn( 400 , null , null ) ;
+						
+				$mfa = new mfa( $A , $param ) ;
+				$tmp = $mfa->manage( 'AUTHENTICATE' ) ;	
+			
+				if ( $tmp == 0 ) 		 
+					return $this->setReturn( 204 , 'Device was Authenticated' , null ) ;
+				else if ( $tmp == 1 )
+					return $this->setReturn( 401 , 'Device is not registered.' , null ) ;
+				else if ( $tmp == 2 )
+					return $this->setReturn( 403 , 'Device was Banned.' , null )  ;
+				else if ( $tmp == 3 )
+					return $this->setReturn( 400 , 'Device was not Authenticated.' , null )  ;
 			}
 			
 			/**
@@ -211,6 +372,10 @@
 			 * 	@return					a JSON message string
 			 */
 			public function getWidget( $parameters ) {
+				if ( ! defined( 'CURRENT_USER_ID ' ) ) {
+					return $this->setReturn( 401 , null , null ) ;	
+				}
+				
 				// error checking parameters
 				if ( is_array( $parameters ) ) {
 					$arr = $parameters ;
@@ -223,11 +388,11 @@
 				switch ( trim( $arr[ 0 ] ) ) {
 					// Missing WGT name
 					case '' :
-						return $this->isBadSyntax() ;
+						return $this->setReturn( 400 , null , null ) ;
 												
 					// Returning available widgets	
 					case 'getWidgetList' :
-						return $this->isSuccess( null , getDirectoryList( $this->A , $this->A[ 'D_WGT' ]) ) ;
+						return $this->setReturn( 200 , null , getDirectoryList( $this->A , $this->A[ 'D_WGT' ]) ) ;
 							
 					// Finding Widget
 					default :
@@ -244,20 +409,9 @@
 						}
 						
 						// 	Widget was not found status being returned
-						return $this->isNotFound() ;
+						return $this->setReturn( 404 , null , null ) ;
 				}
 			}
-			
-			// COMMENT FUNCTIONS
-			
-			//public function addcomment() {}
-					
-			//public function deleteComment() {}
-			
-			//public function updateComment() {}
-			
-			//public function getComment() {}
-			
 			
 		}
 	

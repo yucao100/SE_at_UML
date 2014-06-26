@@ -22,10 +22,11 @@
 		 * 
 		 * 	This class handles mysql connections
 		 * 
-		 * 	was found online
+		 * 	concept was based off of a class found online
 		 * 	http://alperguc.blogspot.com/2013/08/php-database-class-mysqli.html
 		 * 	but then later modified.
 		 * 
+		 * 	$connection		a mysqli connection
 		 */
 		// My database Class called myDBC
 		class mysql {
@@ -106,7 +107,7 @@
 						
 						// 	append the keys and cleaned inputs to their strings
 						$column .= '`'. $key .'`' ;
-						$values .= '"' . /*$this->cleanString(*/ $value /*)*/ . '"' ;
+						$values .= '"' . $this->cleanString( $value ) . '"' ;
 						
 						// 	Set bool to true to signify that the commas can 
 						//	start being generated
@@ -166,6 +167,74 @@
 				// 	If there where key pairs
 				if ( $options != '' ) 
 					$query .= '` WHERE ' . $options ;
+
+				// 	Query mysql
+				return $this->runQuery( $query ) ;
+			}
+			
+			/**
+			 * 	select
+			 * 
+			 * 	This function creates a mysql select query from an array of 
+			 * 	values , operators and table location
+			 * 
+			 * 	@param	$table		table to performt he operation on
+			 * 	@param	$keyPairs	The array of values
+			 * 						array( key => pair )
+			 * 	@param	$operators	The relationship betweent the key and value 
+			 * 						ie wether they must be equal or not, 
+			 * 						using php comparison operators for consistency
+			 * 	@return				Mysqli return values
+			 */
+			public function update( $table , $keyPairs , $operators , $newKeyPairs ) {
+				
+				//VARIABLES
+				$i = 0 ;			//	operator incrementor
+				$bool = false ;		//	first item sentinel
+				$options = $change = '';		// 	the WHERE options
+
+				//	Run through all the keyPairs
+				foreach( $keyPairs as $key => $val ) {
+					
+					// 	If the second string or beyond seperate with commas
+					if ( $bool ) {
+						$options .= ' AND '  ;
+					}
+					
+					$options .= '`' . $key . '`' . 
+						$this->getOperator( $operators[ $i++ ] ) . 
+						'"' . /*$this->cleanString(*/ $val /*)*/ . '"' ;
+										
+					// 	Set bool to true to signify that the commas can 
+					//	start being generated
+					$bool = true ;
+					
+				}
+
+				$bool = false ;
+				foreach( $newKeyPairs as $key => $val ) {
+					
+					// 	If the second string or beyond seperate with commas
+					if ( $bool ) {
+						$change .= ' , '  ;
+					}
+					
+					$change .= '`' . $key . '`=' . 
+						'"' . /*$this->cleanString(*/ $val /*)*/ . '"' ;
+										
+					// 	Set bool to true to signify that the commas can 
+					//	start being generated
+					$bool = true ;
+					
+				}
+				
+				// 	Generate Query
+				$query = 'UPDATE `' . $table .'`' ; 
+				$query .= ' SET ' . $change ;
+				
+				// 	If there where key pairs
+				if ( $options != '' ) 
+					$query .= ' WHERE ' . $options ;
 
 				// 	Query mysql
 				return $this->runQuery( $query ) ;

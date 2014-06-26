@@ -25,5 +25,6 @@
 	echo '<link href="' , $A['W_CSS'] , 'profile-generator.css" 		rel="stylesheet" type="text/css">' ;
 	echo '<link href="' , $A['W_CSS'] , 'toolbar-menu.css" 				rel="stylesheet" type="text/css">' ;
 	echo '<link href="' , $A['W_CSS'] , 'toolbar-tabs.css" 				rel="stylesheet" type="text/css">' ;
+	echo '<link href="' , $A['W_CSS'] , 'sec-registration.css" 			rel="stylesheet" type="text/css">' ;
 	
 ?>

@@ -11,19 +11,7 @@
      *  5/24/14			manage() REMOVE, REGISTER finished  
      * 	4/28/14			Underlying methods written
      */
-	function errorsOn( $bool ) {
-		
-		// 	Turning errors on
-		ini_set( 'display_errors' , 'On' ) ;
-		
-		// 	Setting the error format
-		ini_set( 'error_prepend_string', '<div class="error">[ PHP ]' ) ;
-		ini_set( 'error_append_string',  '</div>' );
-		
-		// 	Displaying all errors
-		error_reporting( E_ALL ) ;	
-	}
-	errorsOn( true ) ;
+	
     //  DEFINE GUARD
     if ( !defined( 'class_user' ) )  {
         
@@ -34,14 +22,33 @@
          * 
          *  This is tha application security, It will be used to validate 
          *  all users
+         * 
+         * 	$A			The application globals
+         * 	$user		The user information	
+         * 	$token		A generated token
+         * 	$epoch		a unix timestamp generating array that limits 
+         * 				the life of a session
+         * 	$debug		Wether to run with a debug callstack
+         * 	$tab		the callstack indenter count for visualization
          */
         class user {
             
             // 	VARIABLES
  
             private $A ;		//	The Global Settings and Paths       
-                         
-            private $debug = true ;
+            private $user ;
+            private $token ;      
+            
+            // How long sessions should be allowed to be active 
+            //		W = week
+            //		D = day
+            //		H = hour
+            //		M = minutes
+            //		S = seconds
+            private $epoch = array( 'W' => 0 , 'D' => 0 , 'H' => 0 , 'M' => 5 , 'S' => 0 ) ;
+            
+            private $debug = false ;
+            private $tab = -1 ;
 			//  CONSTRUCTOR
 			
 			/**
@@ -53,18 +60,48 @@
              *  @param  $user   The user variable
              * 	@param $token	The current user token
              */ 
-            public function __construct( $A , $user , $token ) {
+            public function __construct( $A , $user , $token = false ) {
              
                 $this->callStack( '__construct' ) ;
-                $this->A = $A ;
-                $this->user = $user ;
-                $this->token = $token ; 
                 
+                $this->A = $A ;
+                
+				if ( $token ) { 
+					
+
+				}
+				else {
+					$this->user = $user ;
+				}
+                // Calculate time from epoch array
+				$t = $this->epoch ;
+				$t[ 'W' ] *= 7 ;
+				$t[ 'D' ] += $t[ 'W' ] ;
+				$t[ 'D' ] *= 24 ;
+				$t[ 'H' ] += $t[ 'D' ] ;
+				$t[ 'H' ] *= 60 ;
+				$t[ 'M' ] += $t[ 'H' ] ;
+				$t[ 'M' ] *= 60 ;
+				$t[ 'S' ] += $t[ 'M' ] ;
+                $this->epoch[ 'T' ] = $t[ 'S' ] ;
+                
+                $this->callStack( null , true ) ;
             }
             
             //	DEBUG
             
-            private function callStack( $str ) {
+            private function callStack( $str , $bool = false ) {
+				if( $bool){
+					--$this->tab ;
+					return ;
+				}
+				else{
+					++$this->tab ;
+				}
+				
+				for ( $i = 0 ; $i < $this->tab ; ++$i ) 
+					echo "  " ;
+					
 				if ( $this->debug )
 					echo $str , '<br/>' ;
 			}
@@ -114,6 +151,7 @@
                 $size = mcrypt_get_iv_size( MCRYPT_CAST_256 , MCRYPT_MODE_CFB ) ;
                 
                 // returning the salt
+                $this->callStack( null , true ) ;
                 return bin2hex( mcrypt_create_iv( $size, MCRYPT_RAND ) ) ;
             }
             /** 
@@ -130,6 +168,7 @@
 				$row = $result->fetch_array( MYSQLI_ASSOC ) ;
 				
 				// return the salt
+				$this->callStack( null , true ) ;
 				return $row[ 'usr_pwd_salt' ] ;
 				
 			}
@@ -152,10 +191,11 @@
                     case 'sha256' : 
                     case 'sha512' : 
                        // generate the password hash
+                       $this->callStack( null , true ) ;
                        return hash( $this->A[ 'SEC' ][ 'HASH_ALG' ] , $salt.$password ) ;
                     default :
                           // disallow the chosen algorithm, and return nothing
-                       
+						$this->callStack( null , true ) ;
                         return null ;
                 }   
             }
@@ -181,12 +221,16 @@
                 $this->callStack( 'register' ) ;
                 
                 // Is user already registered
-                if ( $this->isUser( ) )
+                if ( $this->isUser( ) ) {
+					$this->callStack( null , true ) ;
                     return 1 ;
+				}
                 
                 // VALIDATE INPUT
-                if ( !$this->processFields() ) 
+                if ( !$this->processFields() ) {
+                    $this->callStack( null , true ) ;
                     return 2 ;
+                }
                   
                 // Get the password salt
                 $this->user[ 'usr_pwd_salt' ] = $this->genSalt() ;
@@ -195,14 +239,19 @@
                 $this->user[ 'usr_pwd_hash' ] = $this->hash( $this->user[ 'usr_pwd_salt' ] , $this->user[ 'usr_pwd_1' ] ) ;     
 
 				if ( $this->user[ 'usr_pwd_salt' ] == null || 
-					 $this->user[ 'usr_pwd_hash' ] == null )
+					 $this->user[ 'usr_pwd_hash' ] == null ) {
+						$this->callStack( null , true ) ;
 						return 3 ;
+				}
 						
                 // Update user table
-                if ( !$this->setUser() ) 
+                if ( !$this->setUser() ) {
+					$this->callStack( null , true ) ;
                     return 4 ;
+				}
 				               
                 // Succesfull registration
+                $this->callStack( null , true ) ;
                 return 0 ;
                 
             }
@@ -222,14 +271,19 @@
                 $this->callStack( 'logOnUser' ) ;
                 
                 // Validate User
-                if ( !$this->isUser() ) 
+                if ( !$this->isUser() ) {
+					$this->callStack( null , true ) ;
                     return 1 ;
+                }
                 
                 // Validate Password
-                if ( !$this->isPassword( $this->user[ 'usr_pwd_1' ] ) ) 
+                if ( !$this->isPassword( $this->user[ 'usr_pwd_1' ] ) ) {
+                    $this->callStack( null , true ) ;
                     return 2 ;
+				}
 				
 				// User is valid
+				$this->callStack( null , true ) ;
 				return 0 ; 
             }
 			
@@ -254,16 +308,14 @@
                 
                 $DB = new mysql( $this->A ) ;
             			
-				$result = $this->getUser() ;
-				$row = $result->fetch_array( MYSQLI_ASSOC ) ;
+				$row = $this->getUser() ;
 						
 				$operators = array( '==' ) ;
                 $keyPairs = array( 'usr_email' => $row[ 'usr_email' ] ) ;
 
 				$result = $DB->delete( $table , $keyPairs , $operators ) ;
 				
-				
-				
+				$this->callStack( null , true ) ;			
 				return 0 ;
             }
             
@@ -280,15 +332,16 @@
 			
 				$this->callStack( 'isUser' ) ;
              	//	Get user information from DB
-				$result = $this->getUser() ;
-				
-				$row = $result->fetch_array( MYSQLI_ASSOC ) ;
+				$row = $this->getUser() ;
 				
 				// User was not found or matched
                 if ( $row == null ||
-					 $row[ 'usr_email' ] != $this->user[ 'usr_email' ] )
-					 return false ;
+					 $row[ 'usr_email' ] != $this->user[ 'usr_email' ] ){
+						$this->callStack( null , true ) ;
+						return false ;
+				 }
 				// user found	 
+				$this->callStack( null , true ) ;
                 return true ; 
             }           
             
@@ -321,6 +374,7 @@
 				$DB = new mysql( $this->A ) ;
 				$result = $DB->insert( $table , $user ) ;
 				
+				$this->callStack( null , true ) ;
 				return $result ;
                 
             }
@@ -344,8 +398,9 @@
                 
                 $DB = new mysql( $this->A ) ;
                 $result = $DB->select( $table , $keyPairs , $operators ) ;
-
-				return $result ;
+				$row = $result->fetch_array( MYSQLI_ASSOC ) ;
+				$this->callStack( null , true ) ;
+				return $row ;
             }
        
             //  PASSWORD METHODS
@@ -368,14 +423,16 @@
 				$this->callStack( 'isPassword' ) ;
 				
 				//	Get user information from DB
-				$result = $this->getUser() ;
-				$row = $result->fetch_array( MYSQLI_ASSOC ) ;
+				$row = $this->getUser() ;
 
 				//	check password for match
-				if ( $this->hash( $row[ 'usr_pwd_salt' ] , $this->user[ 'usr_pwd_1' ] ) != $row[ 'usr_pwd_hash' ] )
+				if ( $this->hash( $row[ 'usr_pwd_salt' ] , $this->user[ 'usr_pwd_1' ] ) != $row[ 'usr_pwd_hash' ] ){
+					$this->callStack( null , true ) ;
 					return false ;
+				}
 				
-				// 	password matches	
+				// 	password matches
+				$this->callStack( null , true ) ;	
 				return true ;
 				
             }
@@ -394,25 +451,212 @@
                 
                 $this->callStack( 'startSession' ) ;
                 
+                // 	Generate new connections and class instances
+                $token = new token( $this->A ) ;
+				$cookie = new cookie( $this->A ) ;
+				$DB = new mysql( $this->A ) ;
+				
+				// Get current transaction time
+				$currentTime = time() ;
+				
+				// 	Generate a unique token
+				$tok = $token->manage( 'NEW' ) ;
+				
+                // 	Get registered user ID and other reistration details
+                $row = $this->getUser() ;
+				
+				// check that user exists
+				if ( $row == null ) {
+					$this->callStack( null , true ) ;
+					return 1 ;
+				}
+				
+				//	terminate all other user sessions
+				//	edit token valid values for token session
+                $table = 'csr_usr_token' ;
+                $keyPairs = array( 'tok_usr_id' => ( (string) ( $row[ 'id' ] ) ) )  ;
+                $op = array( '==' ) ;
+                $change = array( 'tok_valid' => '0' ) ;
+                $result = $DB->update( $table , $keyPairs , $op , $change ) ;
                 
+				//	edit token valid values for token session
+                /*$table = 'csr_usr_token' ;
+                $keyPairs = array( 'tok_string' => $token ) ;
+                $op = array( '==' ) ;
+                $change = array( 'tok_valid' => 0 ) ;
+                $result = $DB->update( $table , $keyPairs , $op , $change ) ;
+                */	
                 
+				// Store token in cookie session
+                if( $cookie->manage( 'SET' , array( 'name' => 'token' , 'value' => $tok ) ) != 0 ) {
+					$this->callStack( null , true ) ;
+					return 2 ;
+				}
+					
+				if ( !( isset( $_SERVER[ 'REMOTE_ADDR' ] ) ) || 
+					$_SERVER[ 'REMOTE_ADDR' ] == null ){
+						$this->callStack( null , true ) ;
+						return 3 ;
+				}
+				
+				// 	generate data for storage
+                $keyPairs = array( 'tok_usr_id' => $row[ 'id' ] , 'tok_usr_ip' => $_SERVER[ 'REMOTE_ADDR' ] , 'tok_epoch' => $currentTime , 'tok_string' => $tok, 'tok_valid' => true ) ;
                 
-                
-                
-                
-                if ( !$this->setToken() ) 
-                    return false ;
-                
-                if ( !$this->insertSession() ) 
-					return false ;
+                //	insert token values for server session
+                $table = 'csr_usr_token' ;
+                $result = $DB->insert( $table , $keyPairs ) ;
 					
                 //  Session Started
-                return true ;
+                $this->callStack( null , true ) ;
+                return 0 ;
             }
-            private function endSession() {}
-            private function getSessionState() {}
-            private function getSessionInfo() {}
             
+            /**
+             * 	endSession
+             * 
+             * 	This function terminsates a user session
+             */
+            private function endSession() {
+				$this->callStack( 'endSession' ) ;
+				
+				$C = new cookie( $this->A ) ;
+				$DB = new mysql( $this->A ) ;
+				
+				$token = $C->manage( 'GET' , array( 'name' => 'token' ) ) ;
+				
+
+                //	edit token valid values for token session
+                $table = 'csr_usr_token' ;
+                $keyPairs = array( 'tok_string' => $token ) ;
+                $op = array( '==' ) ;
+                $change = array( 'tok_valid' => 0 ) ;
+                $result = $DB->update( $table , $keyPairs , $op , $change ) ;
+                                
+				$C->manage( 'DELETE' , array( 'name' => 'token' ) ) ;
+				
+				$this->callStack( null , true ) ;
+			}
+
+            /**
+             * 	getSessionState
+             * 
+             * 	This function gets the session information
+             * 
+             * 	@return	null	the seesion is not real
+             * 	@return string	the session information
+             */
+            private function getSessionInfo() {
+				$this->callStack( 'getSessionInfo' ) ;
+				
+				//	Variables
+				$DB = new mysql( $this->A ) ;
+				$C  = new cookie( $this->A ) ;
+				
+				//	getting token details
+				$table = 'csr_usr_token' ;
+				$tokenString = $C->manage( 'GET' , array( 'name' => 'token' ) ) ;
+				$keyPairs = array( 'tok_string' => $tokenString ) ;
+				$operators = array( '==' ) ;
+                $result = $DB->select( $table , $keyPairs , $operators ) ;
+                // converting the query to an array
+				$rowToken = $result->fetch_array( MYSQLI_ASSOC ) ;
+				
+				//	if token found
+                if ( $rowToken == null ) {
+					$this->callStack( null , true ) ;
+					return null ;
+				}
+				
+				//	getting user information from token details
+				$table = 'csr_usr_account' ;
+				$keyPairs = array( 'id' => $rowToken[ 'tok_usr_id' ] ) ;
+				$operators = array( '==' ) ;
+                $result = $DB->select( $table , $keyPairs , $operators ) ;
+				// converting the query to an array
+				$rowUser = $result->fetch_array( MYSQLI_ASSOC ) ;
+				
+				// if user found
+				if ( $rowUser == null ) {
+					$this->callStack( null , true ) ;
+					return null ;
+				}
+				
+				$this->isSessionValid( ) == 0 ? $tmp = 1 : $tmp = 0 ;
+				//	generating information
+				$result = array( 'id' 			=> $rowUser[ 'id' ] , 
+								 'usr_email' 	=> $rowUser[ 'usr_email' ] , 
+								 'tok_string' 	=> $rowToken[ 'tok_string' ] , 
+								 'tok_usr_ip' 	=> $rowToken[ 'tok_usr_ip' ] , 
+								 'tok_epoch' 	=> $rowToken[ 'tok_epoch' ] , 
+								 'tok_valid' 	=> $rowToken[ 'tok_valid' ] ,
+								 'session_active' 	=> $tmp ) ;
+				
+				$this->callStack( null , true ) ;		  
+				return $result;
+			}
+            
+            /**
+             * 	isSessionValid
+             * 
+             * 	This function validates a session
+             * 
+             * 	@return	0		valid token
+             * 	@return 1 		token not in database 
+             * 	@return 2		usr is not registered
+             * 	@return 3		invalid token
+             */
+            private function isSessionValid( ) {
+				$this->callStack( 'isSessionValid' ) ;
+				
+				//	Variables
+				$DB = new mysql( $this->A ) ;
+				$C  = new cookie( $this->A ) ;
+				
+				// 	getting token information from database
+				$table = 'csr_usr_token' ;
+				$tokenString = $C->manage( 'GET' , array( 'name' => 'token' ) ) ;
+				$keyPairs = array( 'tok_string' => $tokenString ) ;
+				$operators = array( '==' ) ;
+                $result = $DB->select( $table , $keyPairs , $operators ) ;
+                // 	converting the query to an array
+				$rowToken = $result->fetch_array( MYSQLI_ASSOC ) ;
+				
+				// if value was found
+				if ( $rowToken == null ) {
+					$this->callStack( null , true ) ;
+					return 1 ;
+				}
+				
+				//	getting user information from token details
+				$table = 'csr_usr_account' ;
+				$keyPairs = array( 'id' => $rowToken[ 'tok_usr_id' ] ) ;
+				$operators = array( '==' ) ;
+                $result = $DB->select( $table , $keyPairs , $operators ) ;
+				// converting the query to an array
+				$rowUser = $result->fetch_array( MYSQLI_ASSOC ) ;
+				
+				$this->tokenUser = $rowUser ;
+				
+				//	if user found
+				if ( $rowUser == null ) {
+					$this->callStack( null , true ) ;
+					return 2 ;
+				}
+				
+				//	validating fields
+				if ( $rowToken[ 'tok_valid' ] == 1 &&
+					 $rowToken[ 'tok_epoch' ] > time() - $this->epoch[ 'T' ] &&
+					 $rowToken[ 'tok_usr_ip' ] == $_SERVER[ 'REMOTE_ADDR' ] ) {
+						//valid token
+						$this->callStack( null , true ) ;				 
+						return 0 ;
+				}
+				
+				//	invalid token
+				$this->callStack( null , true ) ;
+				return 3 ;
+					
+			}
                          
             // 	FIELD METHODS
             
@@ -444,6 +688,7 @@
                     //  STRINGS
                     case 'STRING' : 
                     case 'NAME' :
+						$this->callStack( null , true ) ;
                         return true ;
                         break ;
                     
@@ -475,19 +720,25 @@
                         $regex = '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/' ;
                         break ;
                     case 'EPOCH' :
-                        if ( time() > $string )
+                        if ( time() > $string ) {
+							$this->callStack( null , true ) ;
                             return true ;
+                        }
                 
                     default :
                         // not a valid regex option
+                        $this->callStack( null , true ) ;
                         return false ;
                 }
                 
                 // Run the preg_match() function on regex against the string
-                if ( preg_match( $regex , $string ) ) 
+                if ( preg_match( $regex , $string ) ) {
+					$this->callStack( null , true ) ;
                     return true ;
+				}
 
                 // regex not matched ;
+                $this->callStack( null , true ) ;
                 return false ;
             }
             /**
@@ -513,6 +764,7 @@
                     
                     case 'DATE' : 
                         // Get unix usr_dob_epoch value of date in format YYYY-MM-DD
+                        $this->callStack( null , true ) ;
                         return strtotime( $string ) ;
                         
                     case 'P_C' :
@@ -521,16 +773,19 @@
                     case 'P_E' :
                         //  Remove non digits
                         $regex = '/[^0-9]*/';
+                        $this->callStack( null , true ) ;
                         return preg_replace( $regex , '' , $string ) ;
                         
                     case 'PWD' :
                         //  Keep password intact
+                        $this->callStack( null , true ) ;
                         return $string ;
 
                     case 'EMAIL' :
                     case 'NAME' :
                     default :
                         // Make all lowercase
+                        $this->callStack( null , true ) ;
                         return strtolower( $string ) ;
                 }
         
@@ -561,9 +816,10 @@
                 $this->user[ 'usr_pwd_2'  ] 		= $this->cleanField( 'PWD'   , $this->user[ 'usr_pwd_2' ] ) ;
                 
                 // Are fields valid 
-                if ( !( $this->validateField( 'DATE'  , $this->user[ 'usr_dob' ] ) ) )
+                if ( !( $this->validateField( 'DATE'  , $this->user[ 'usr_dob' ] ) ) ) {
+					$this->callStack( null , true ) ;
 					return false ;
-                            
+				}
                 //  Generating the Unix timestamps of dates
                 $this->user[ 'usr_dob_epoch' ] = $this->cleanField( 'DATE' , $this->user[ 'usr_dob' ] ) ;
                 
@@ -578,14 +834,20 @@
                         $this->validateField( 'P_N'   , $this->user[ 'usr_phone_number' ] ) &&
                         $this->validateField( 'P_E'   , $this->user[ 'usr_phone_ext' ] ) &&
                         $this->validateField( 'PWD'   , $this->user[ 'usr_pwd_1' ] ) &&
-                        $this->validateField( 'PWD'   , $this->user[ 'usr_pwd_2' ] ) ) ) 
+                        $this->validateField( 'PWD'   , $this->user[ 'usr_pwd_2' ] ) ) ) {
+							
+							$this->callStack( null , true ) ;
                             return false ;  
+						}
                                         
                 // Check if passwords match
-                if ( $this->user[ 'usr_pwd_1' ] != $this->user[ 'usr_pwd_2' ] )
+                if ( $this->user[ 'usr_pwd_1' ] != $this->user[ 'usr_pwd_2' ] ){
+					$this->callStack( null , true ) ;
                     return false ;
+				}
                 
                 // Passes all input tests
+                $this->callStack( null , true ) ;
                 return true ;
             }
             
@@ -607,27 +869,31 @@
 			 * 	@return	int		success or failure of the operation
 			 */
 			public 	function session( $state ) {
-				
+				$this->callStack( 'session' ) ;
 				switch ( $state ) {
 					case 'START' :
-						$this->startSession() ;
-						return ;
+						$tmp = $this->startSession() ; //done
+						break ;
+
 					case 'RESET' :
 						$this->endSession() ;
-						$this->startSession() ;						
-						return ;
+						$tmp = $this->startSession() ;						
+						break ;
 					case 'STOP' :
-						$this->endSession() ;
-						return ;
+						$tmp = $this->endSession() ;
+						break ;
 					case 'INFO' :
-						$this->getSessionInfo() ;
-						return ;	
-					case 'STATUS' :
+						$tmp = $this->getSessionInfo() ; //WIP
+						break ;
+						
+					case 'STATE' :
 					default:
-						$this->getSessionStatus() ;
-						return ;
+						$tmp = $this->isSessionValid() ;
+						break ;					
+						
 				}
-				
+				$this->callStack( null , true ) ;
+				return $tmp ;
 			}
 			/**
 			 * 	manage
@@ -640,80 +906,40 @@
 			 * 	@return	int			success or failure messages
 			 */
 			public 	function manage( $action , $P = null ) {
-				
+				$this->callStack( 'manage'  ) ;
 				switch ( $action ) {
 					case 'REGISTER' :
-						return $this->register() ;
-												
+						$tmp = $this->register() ;
+						break ; 
+					
+					case 'LOGIN' :
+						$tmp = $this->authenticate() ;
+						break ;
+						
 					case 'REMOVE' :
-						return $this->removeUser() ;
-											
+						$tmp =  $this->removeUser() ;
+						break ;
+					
+					case 'SESSION' :
+						if ( $P == null ) {
+							$tmp = false ;
+							break ;
+						}
+						$tmp =  $this->session( $P ) ;
+						break ;
+						
 					default:
-						return ;
-				}				
+						$tmp = null ;
+						break ;
+				}
+				
+				$this->callStack( null , true ) ;
+				return $tmp ;				
 			}
 			
         }
         
     }
-    
-    
-    
-    include( 'mysql.php' ) ;
-	include( 'cookie.php' ) ;
-	include( 'token.php' ) ;
-	
-	
-	
-    //echo ini_set ( 'variables_order' , 'EGPCS' ) ;
-	// SECURITY VALUE
-    $A[ 'SEC' ][ 'HASH_ALG' ] = 'sha256' ;
-    
-    // MYSQL
-    $A[ 'M_USR' ] 	= 'root' ; //$_E[ 'CSR_MYSQL_USR' ] ; 
-    $A[ 'M_PWD' ] 	= 'Dsce18lse2k3' ; //$_E[ 'CSR_MYSQL_usr_pwd_1' ] ;
-
-	//echo var_dump($_ENV);
-	$A[ 'M_DB' ] 	= 'csr' ;
-    $A[ 'M_SERVER' ] = 'localhost' ;
-
-    // NEW USER
-    $form = array(  'usr_email' => 'jose.flores.152@gmail.com' ,
-                    'usr_name_first' => 'Jose' ,
-                    'usr_name_middle' => 'Francisco' ,
-                    'usr_name_last' => 'Flores' ,
-                    'usr_dob' => '1984-12-18' ,
-                    'usr_phone_country' => '1' ,
-                    'usr_phone_area' => '508' ,
-                    'usr_phone_number' => '2457496' ,
-                    'usr_phone_ext' => '' ,
-                    'usr_pwd_1' => 'Dsce18lse2k3$' ,
-                    'usr_pwd_2' => 'Dsce18lse2k3$' ,
-                    'usr_dob_epoch' => '' ) ;
-    
-    // INSTANCE        
-    //$user = new user( $A , $form , null ) ;
-	$cookie = new cookie( $A ) ;
-	$token = new token( $A ) ;
-    //echo $user->manage( 'REGISTER' ) , "\n" ;
-    
-    $P = array( 'name' => 'cookie' , 'value' => 'my Cookie' ) ;
-    
-    echo $token->manage( 'NEW' ) ;
-    
-    //echo $cookie->manage( 'SET' , $P ) ;
-    //echo $cookie->manage( 'GET' , $P ) ;
-    //echo $cookie->manage( 'DELETE' , $P ) ;
-    
-    
-    //echo $user->manage( 'REMOVE' ) , "\n" ;
-    
-    //echo $user->authenticate() , "\n" ;
-    
-    // Start Session
-    // End Session
-    // remove
-    // 
     
    
     
