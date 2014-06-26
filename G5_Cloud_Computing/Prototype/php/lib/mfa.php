@@ -121,19 +121,23 @@
 					return 2 ;
 				}
 				
+				$tk = new token() ;
+				$this->param[ 'USR_SALT' ] = $tk->genSalt() ;
+				$this->param[ 'USR_PEPPER' ] = $tk->genSalt() ;
+				
 				// Register Device
 				$table = 'csr_mfa_account' ;
 				$keyPairs = array(  'mfa_device_id' 	=> $this->param[ 'USR_PHONE' ] ,
 									'mfa_device_date' 	=> $this->param[ 'USR_TIMESTAMP' ] ,
 									'mfa_device_pin' 	=> $this->pin , 
-									'mfa_device_salt' 	=> $this->param[ 'USR_SALT' ] ,
-									'mfa_device_pepper' => $this->param[ 'USR_PEPPER' ] ,
+									'mfa_device_salt' 	=> $this->param[ 'USR_SALT' ] , 
+									'mfa_device_pepper' => $this->param[ 'USR_PEPPER' ] , 
 									'mfa_device_owner_id'  => $owner ,
 									'mfa_device_attempt'=> 0 ,
 									'mfa_device_active' => 0 ) ;
 				
 				$DB->insert(  $table , $keyPairs ) ;
-				$this->emailPin ;
+				$this->emailPin() ;
 				return array( 'salt' => $this->param[ 'USR_SALT' ] , 'pepper' => $this->param[ 'USR_PEPPER' ] ) ; 
 
 			}
@@ -289,6 +293,10 @@
 				 * (int) ( ( time() + ( $i * $precision ) ) / $precision ) . 
 				 * calculates the current time and allows for increments in 
 				 * periods incase there is a delay in transmission
+				 * 
+				 * Sender must use $i of 0 
+				 * precision must match the reciever
+				 * encryption must also match reciever : sha256
 				 */
 				return hash( $encryption , 
 							 $mfa_device_salt . 

@@ -66,7 +66,7 @@
              * 
              *  @return salt        The salt to be used in encryption
              */
-            private function genSalt() {
+            public function genSalt() {
                              
                 //  the size of the initialized vector
                 $size = mcrypt_get_iv_size( MCRYPT_CAST_256 , MCRYPT_MODE_CFB ) ;

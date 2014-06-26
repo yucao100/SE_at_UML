@@ -214,10 +214,7 @@
 			public function registerMFA( $parameters ) {
 				
 				if( !isset( $parameters[ 'USR_PHONE' ] ) &&
-					!isset( $parameters[ 'USR_EMAIL' ] ) &&
-					!isset( $parameters[ 'USR_SALT' ] ) &&
-					!isset( $parameters[ 'USR_PEPPER' ] ) &&
-					!isset( $parameters[ 'USR_TIMESTAMP' ] ) )
+					!isset( $parameters[ 'USR_EMAIL' ] ) )
 						return $this->setReturn( 400 , null , null ) ;
 						
 				$mfa = new mfa( $A , $parameters ) ;
@@ -279,7 +276,7 @@
 				
 				if ( $tmp === 0 ) {
 					// registration succesfull
-					return $this->setReturn( 200 , 'Registration succesful' , null ) ; 
+					return $this->setReturn( 204 , 'Registration succesful' , null ) ; 
 				}
 				// failure
 				return $this->setReturn( 500 , 'Registration Failed' , null ) ;
@@ -303,7 +300,7 @@
 				if ( $tmp === 0 ) {
 					// registration succesfull
 					$user->manage( 'SESSION' , 'START' ) ;
-					return $this->setReturn( 200 , array( 'Authentication succesful' , 'Session started' ) , null ) ; 
+					return $this->setReturn( 204 , array( 'Authentication succesful' , 'Session started' ) , null ) ; 
 				}
 				// failure
 				return $this->setReturn( 500 , 'Authentication failed' , $tmp ) ;
